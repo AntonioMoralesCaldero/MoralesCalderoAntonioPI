@@ -42,7 +42,7 @@ public class LoginController {
             return "redirect:/auth/register";
         }
     }
-//bfnf
+
 
     @GetMapping("/auth/login")
     public String showLoginForm(@RequestParam(value = "error", required = false) String error,
