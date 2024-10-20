@@ -3,127 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Concesionario de coches - Compra y venta de vehículos nuevos y usados">
-    <title>Concesionario - Página Principal</title>
+    <meta name="description" content="Concesionario oficial Suzuki - Venta de coches nuevos y usados">
+    <title>Concesionario Suzuki</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Estilos básicos para el index */
+        /* Estilos generales */
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
         }
 
         header {
-            background-color: #333;
+            background-color: #1a1a1a;
             color: white;
             padding: 20px 0;
-            text-align: center;
         }
 
-        header h1 {
-            margin: 0;
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        nav {
-            margin: 20px 0;
+        header img {
+            height: 60px;
         }
 
         nav ul {
             list-style: none;
-            padding: 0;
-            text-align: center;
+            display: flex;
+            gap: 20px;
         }
 
         nav ul li {
             display: inline;
-            margin: 0 15px;
         }
 
         nav ul li a {
-            color: #333;
+            color: white;
             text-decoration: none;
             font-weight: bold;
         }
 
         .hero {
-            background: url('hero-image.jpg') no-repeat center center/cover;
-            height: 400px;
-            color: white;
-            text-align: center;
+            background: url('suzuki-hero.jpg') no-repeat center center/cover;
+            height: 80vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            color: white;
+            text-align: center;
         }
 
-        .hero h2 {
-            font-size: 48px;
+        .hero h1 {
+            font-size: 3.5rem;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
         }
 
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+
         .section {
-            padding: 40px 20px;
+            padding: 60px 20px;
             text-align: center;
         }
 
-        .section h3 {
+        .section h2 {
             margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #1a1a1a;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            color: #555;
         }
 
         .cta {
-            background-color: #ff7f50;
+            background-color: #e30613;
             color: white;
-            padding: 20px;
-            margin-top: 40px;
-            display: block;
-            text-decoration: none;
-            text-align: center;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
             font-weight: bold;
+            text-decoration: none;
             border-radius: 5px;
         }
 
+        .cta:hover {
+            background-color: #cc0612;
+        }
+
         footer {
-            background-color: #333;
+            background-color: #1a1a1a;
             color: white;
-            padding: 10px 0;
+            padding: 20px;
             text-align: center;
-            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .vehicles {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .vehicle-card {
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 300px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .vehicle-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .vehicle-card h3 {
+            font-size: 1.5rem;
+            padding: 20px 0 10px;
+        }
+
+        .vehicle-card p {
+            padding: 0 20px 20px;
+            color: #777;
+        }
+
+        .vehicle-card .cta {
+            margin: 0 20px 20px;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Concesionario de Coches</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Vehículos</a></li>
-                <li><a href="#">Citas</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="#">Sobre Nosotros</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <img src="suzuki-logo.png" alt="Suzuki Logo">
+            <nav>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Modelos</a></li>
+                    <li><a href="#">Citas</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <section class="hero">
-        <h2>¡Encuentra el coche de tus sueños!</h2>
+        <div>
+            <h1>Bienvenido al Concesionario Suzuki</h1>
+            <p>Encuentra el coche perfecto para ti con la tecnología y estilo de Suzuki</p>
+            <a href="#modelos" class="cta">Ver modelos</a>
+        </div>
     </section>
 
-    <section class="section">
-        <h3>Nuestros Servicios</h3>
-        <p>Ofrecemos una amplia gama de vehículos, desde modelos nuevos hasta usados certificados.</p>
-    </section>
-
-    <section class="section">
-        <h3>¿Vendes tu coche?</h3>
-        <p>Nosotros te ayudamos. Obtén una valoración justa y rápida.</p>
-        <a href="#" class="cta">¡Vende tu coche ahora!</a>
+    <section class="section" id="modelos">
+        <h2>Nuestros Modelos Destacados</h2>
+        <p>Explora nuestra gama de vehículos Suzuki. Calidad, tecnología y diseño para cada necesidad.</p>
+        <div class="vehicles">
+            <div class="vehicle-card">
+                <img src="suzuki-swift.jpg" alt="Suzuki Swift">
+                <h3>Suzuki Swift</h3>
+                <p>Compacto, ágil y con un diseño deportivo. Ideal para la ciudad.</p>
+                <a href="#" class="cta">Descubre más</a>
+            </div>
+            <div class="vehicle-card">
+                <img src="suzuki-vitara.jpg" alt="Suzuki Vitara">
+                <h3>Suzuki Vitara</h3>
+                <p>El SUV que combina versatilidad, estilo y seguridad en cualquier terreno.</p>
+                <a href="#" class="cta">Descubre más</a>
+            </div>
+            <div class="vehicle-card">
+                <img src="suzuki-jimny.jpg" alt="Suzuki Jimny">
+                <h3>Suzuki Jimny</h3>
+                <p>Aventurero por naturaleza. Un 4x4 legendario con espíritu indomable.</p>
+                <a href="#" class="cta">Descubre más</a>
+            </div>
+        </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 Concesionario de Coches. Todos los derechos reservados.</p>
+        <p>&copy; 2024 Concesionario Suzuki. Todos los derechos reservados.</p>
     </footer>
 
 </body>
