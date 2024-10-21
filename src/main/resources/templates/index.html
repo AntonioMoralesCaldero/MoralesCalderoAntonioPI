@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Concesionario oficial Suzuki - Venta de coches nuevos y usados">
-    <title>Concesionario Suzuki</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Concesionario oficial Subaru - Venta de coches nuevos y usados">
+    <title>Concesionario Subaru</title>
+    <link rel="stylesheet" href="/css/styles.css">
     <style>
-        /* Estilos generales */
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
@@ -16,9 +15,9 @@
         }
 
         header {
-            background-color: #1a1a1a;
+            background-color: #003a70;
             color: white;
-            padding: 20px 0;
+            padding: 10px 40px; /* Añadir padding para separar del borde */
         }
 
         header .container {
@@ -27,14 +26,12 @@
             align-items: center;
         }
 
-        header img {
-            height: 60px;
-        }
-
         nav ul {
             list-style: none;
             display: flex;
-            gap: 20px;
+            gap: 30px; /* Espacio adicional entre elementos del nav */
+            margin: 0;
+            padding: 0;
         }
 
         nav ul li {
@@ -45,26 +42,40 @@
             color: white;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .auth-buttons a {
+            background-color: transparent; /* Fondo transparente */
+            color: white;
+            border: 1px solid white;
+            padding: 8px 15px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .auth-buttons a:hover {
+            background-color: white;
+            color: #003a70;
         }
 
         .hero {
-            background: url('suzuki-hero.jpg') no-repeat center center/cover;
-            height: 80vh;
+            background: url('/images/background.jpg') no-repeat center center/cover;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
-            text-align: center;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-top: 20px;
+        .hero div {
+            display: none;
         }
 
         .section {
@@ -75,7 +86,7 @@
         .section h2 {
             margin-bottom: 20px;
             font-size: 2.5rem;
-            color: #1a1a1a;
+            color: #003a70;
         }
 
         .section p {
@@ -100,7 +111,7 @@
         }
 
         footer {
-            background-color: #1a1a1a;
+            background-color: #003a70;
             color: white;
             padding: 20px;
             text-align: center;
@@ -153,53 +164,52 @@
 
     <header>
         <div class="container">
-            <img src="suzuki-logo.png" alt="Suzuki Logo">
             <nav>
                 <ul>
                     <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Modelos</a></li>
+                    <li><a href="/catalogo">Catalogo</a></li>
                     <li><a href="#">Citas</a></li>
                     <li><a href="#">Contacto</a></li>
                 </ul>
             </nav>
+            <div class="auth-buttons">
+                <a href="login.html">Iniciar Sesión</a>
+                <a href="register.html">Registrarse</a>
+            </div>
         </div>
     </header>
 
     <section class="hero">
-        <div>
-            <h1>Bienvenido al Concesionario Suzuki</h1>
-            <p>Encuentra el coche perfecto para ti con la tecnología y estilo de Suzuki</p>
-            <a href="#modelos" class="cta">Ver modelos</a>
-        </div>
+        <div></div>
     </section>
 
     <section class="section" id="modelos">
         <h2>Nuestros Modelos Destacados</h2>
-        <p>Explora nuestra gama de vehículos Suzuki. Calidad, tecnología y diseño para cada necesidad.</p>
+        <p>Explora nuestra gama de vehículos Subaru. Calidad, tecnología y diseño para cada necesidad.</p>
         <div class="vehicles">
             <div class="vehicle-card">
-                <img src="suzuki-swift.jpg" alt="Suzuki Swift">
-                <h3>Suzuki Swift</h3>
+                <img src="/images/subaru-impreza.jpg" alt="Subaru Impreza">
+                <h3>Subaru Impreza</h3>
                 <p>Compacto, ágil y con un diseño deportivo. Ideal para la ciudad.</p>
                 <a href="#" class="cta">Descubre más</a>
             </div>
             <div class="vehicle-card">
-                <img src="suzuki-vitara.jpg" alt="Suzuki Vitara">
-                <h3>Suzuki Vitara</h3>
+                <img src="/images/subaru-forester.jpg" alt="Subaru Forester">
+                <h3>Subaru Forester</h3>
                 <p>El SUV que combina versatilidad, estilo y seguridad en cualquier terreno.</p>
                 <a href="#" class="cta">Descubre más</a>
             </div>
             <div class="vehicle-card">
-                <img src="suzuki-jimny.jpg" alt="Suzuki Jimny">
-                <h3>Suzuki Jimny</h3>
-                <p>Aventurero por naturaleza. Un 4x4 legendario con espíritu indomable.</p>
+                <img src="/images/subaru-xv.jpg" alt="Subaru XV">
+                <h3>Subaru XV</h3>
+                <p>Aventurero por naturaleza. Un SUV con espíritu indomable.</p>
                 <a href="#" class="cta">Descubre más</a>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 Concesionario Suzuki. Todos los derechos reservados.</p>
+        <p>&copy; 2024 Concesionario Subaru. Todos los derechos reservados.</p>
     </footer>
 
 </body>
