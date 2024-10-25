@@ -29,7 +29,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             response.sendRedirect("/adminDashboard");
         } else {
-            response.sendRedirect("/auth/login");
+            response.sendRedirect("/index");
         }
     }
 }
