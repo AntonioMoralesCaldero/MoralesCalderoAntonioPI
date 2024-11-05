@@ -1,43 +1,78 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Login - Concesionario Subaru</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/images/subaru-background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        .card {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+        .card-header {
+            background-color: #2b6aa3;
+            color: #fff;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            border-radius: 15px 15px 0 0;
+        }
+        .form-control {
+            background-color: #f0f0f0;
+        }
+        .btn-primary {
+            background-color: #2b6aa3;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #1e4f76;
+        }
+        .alert {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-5">
+<div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="card">
-                <div class="card-header">
-                    Login
-                </div>
+                <div class="card-header">Inicio de Sesión</div>
                 <div class="card-body">
                     <form th:action="@{/auth/login}" method="post">
-                        <div class="form-group">
-                            <label for="username">Username:</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nombre de usuario:</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese su usuario" required>
                         </div>
-                        <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña:</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
                         </div>
                         <div th:if="${logoutMessage}">
-                            <div class="alert alert-success" th:text="${logoutMessage}">You have been logged out.</div>
+                            <div class="alert alert-success" th:text="${logoutMessage}">Sesión cerrada con éxito.</div>
                         </div>
                         <div th:if="${errorMessage}">
-                            <div class="alert alert-danger" th:text="${errorMessage}">Invalid username and password.</div>
+                            <div class="alert alert-danger" th:text="${errorMessage}">Usuario o contraseña inválidos.</div>
                         </div>
-                        <div class="form-group">
-                            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

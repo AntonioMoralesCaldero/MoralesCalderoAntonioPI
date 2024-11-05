@@ -3,38 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Pacientes</title>
+    <title>Registro de Usuario - Concesionario Subaru</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f4f4f4;
+            background-image: url('/images/subaru-background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
             font-family: 'Arial', sans-serif;
         }
         .container {
-            margin-top: 50px;
+            margin-top: 80px;
         }
         .card {
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
         .card-header {
-            background-color: #007bff;
+            background-color: #2b6aa3;
             color: #fff;
             text-align: center;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
+            border-radius: 15px 15px 0 0;
         }
-        .card-body {
-            padding: 20px;
+        .form-control {
+            background-color: #f0f0f0;
         }
-        .form-label {
-            font-weight: bold;
+        .btn-primary {
+            background-color: #2b6aa3;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #1e4f76;
         }
         .footer {
             text-align: center;
-            padding: 10px 0;
+            color: #ccc;
             margin-top: 40px;
-            color: #666;
         }
     </style>
 </head>
@@ -43,9 +53,9 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Registro de Pacientes</div>
+                <div class="card-header">Registro de Usuario</div>
                 <div class="card-body">
-                    <form th:action="@{/auth/register}" method="post" enctype="multipart/form-data">
+                    <form th:action="@{/auth/register}" method="post">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre:</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -56,7 +66,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento:</label>
-                            <input type="number" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                            <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
                         </div>
                         <div class="mb-3">
                             <label for="direccion" class="form-label">Dirección:</label>
@@ -70,7 +80,7 @@
                             <label for="password" class="form-label">Contraseña:</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        <button type="submit" class="btn btn-primary w-100">Registrar</button>
                     </form>
                 </div>
             </div>
@@ -78,9 +88,8 @@
     </div>
 </div>
 <div class="footer">
-    Centro Médico © 2024. Todos los derechos reservados.
+    Subaru Concesionario © 2024. Todos los derechos reservados.
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

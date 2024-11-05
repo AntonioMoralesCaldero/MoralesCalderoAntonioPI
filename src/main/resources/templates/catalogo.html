@@ -92,7 +92,7 @@
                         <p class="card-text">Color: <span th:text="${vehiculo.color}"></span></p>
                         <p class="card-text">Potencia: <span th:text="${vehiculo.potencia}"></span> CV</p>
                         <p class="card-text">Precio: <span th:text="${vehiculo.precio}"></span> €</p>
-                        <a href="#" class="btn btn-primary">Ver Detalles</a>
+						<a th:href="@{'/vehiculo/detalle/' + ${vehiculo.id}}" class="btn btn-primary">Ver Detalles</a>
                     </div>
                 </div>
             </div>

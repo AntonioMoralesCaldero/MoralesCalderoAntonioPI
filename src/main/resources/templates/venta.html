@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vender Tu Vehículo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            padding: 20px;
+        }
+        .vehicle-card {
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 300px;
+            text-align: center;
+            margin-bottom: 30px;
+            display: inline-block;
+            margin: 10px;
+        }
+        .vehicle-card img {
+            width: 100%;
+            height: auto;
+        }
+        .vehicle-card h3 {
+            padding: 15px 0;
+        }
+        .vehicle-card p {
+            padding: 0 15px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Tus Vehículos</h2>
+        <div th:if="${vehiculos.isEmpty()}">
+            <p>No has comprado ningún vehículo aún.</p>
+        </div>
+        <div th:each="vehiculo : ${vehiculos}" class="vehicle-card">
+            <img th:src="@{/images/{vehiculo.imagen}(vehiculo.imagen)}" th:alt="${vehiculo.modelo}">
+            <h3 th:text="${vehiculo.modelo}"></h3>
+            <p>Color: <span th:text="${vehiculo.color}"></span></p>
+            <p>Potencia: <span th:text="${vehiculo.potencia}"></span> CV</p>
+            <p>Precio: <span th:text="${vehiculo.precio}"></span> €</p>
+        </div>
+    </div>
+</body>
+</html>

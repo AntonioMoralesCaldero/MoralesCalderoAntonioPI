@@ -1,6 +1,8 @@
 //Autor: Antonio Miguel Morales Caldero
 package com.example.demo.model;
 
+import java.time.LocalDate;
+
 public class UsuarioModel {
 	
     private int id;
@@ -9,7 +11,7 @@ public class UsuarioModel {
 
     private String apellidos;
 
-    private int fecha_nacimiento;
+    private LocalDate fecha_nacimiento;
 
     private String direccion;
 
@@ -23,7 +25,7 @@ public class UsuarioModel {
     	
     }
 
-    public UsuarioModel(int id, String nombre, String apellidos, int fecha_nacimiento, String direccion, String username,
+    public UsuarioModel(int id, String nombre, String apellidos, LocalDate fecha_nacimiento, String direccion, String username,
 	String password, boolean isActive) {
 		super();
 		this.id = id;
@@ -60,11 +62,11 @@ public class UsuarioModel {
         this.apellidos = apellidos;
     }
 
-    public int fecha_nacimiento() {
+    public LocalDate fecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setfecha_nacimiento(int fecha_nacimiento) {
+    public void setfecha_nacimiento(LocalDate fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 

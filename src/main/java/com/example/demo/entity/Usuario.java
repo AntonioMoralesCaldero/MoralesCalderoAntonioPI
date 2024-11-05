@@ -1,6 +1,8 @@
 //Autor: Antonio Miguel Morales Caldero
 package com.example.demo.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -18,7 +20,7 @@ public class Usuario {
     private String apellidos;
 
     @Column(name = "fecha_nacmiento")
-    private int fecha_nacimiento;
+    private LocalDate fecha_nacimiento;
 
     @Column(name = "direccion", length = 100)
     private String direccion;
@@ -56,11 +58,11 @@ public class Usuario {
         this.apellidos = apellidos;
     }
 
-    public int fecha_nacimiento() {
+    public LocalDate fecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setfecha_nacimiento(int fecha_nacimiento) {
+    public void setfecha_nacimiento(LocalDate fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 

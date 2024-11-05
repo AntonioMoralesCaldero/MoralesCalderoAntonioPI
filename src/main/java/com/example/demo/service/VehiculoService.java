@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface VehiculoService {
     List<VehiculoModel> getAllVehiculos();
+	VehiculoModel getVehiculoById(int id);
 }

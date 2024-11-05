@@ -161,20 +161,28 @@
     </style>
 </head>
 <body>
-
     <header>
         <div class="container">
             <nav>
                 <ul>
                     <li><a href="#">Inicio</a></li>
-                    <li><a href="/catalogo">Catalogo</a></li>
+                    <li><a href="/catalogo">Catálogo</a></li>
                     <li><a href="#">Citas</a></li>
                     <li><a href="#">Contacto</a></li>
+					<li><a href="/venta">Vender Tu Vehículo</a></li>
                 </ul>
             </nav>
             <div class="auth-buttons">
-                <a href="login.html">Iniciar Sesión</a>
-                <a href="register.html">Registrarse</a>
+                <div sec:authorize="isAuthenticated()">
+                    <span th:text="'Bienvenido, ' + ${#authentication.name}"></span>
+                    <form th:action="@{/logout}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-outline-light">Cerrar Sesión</button>
+                    </form>
+                </div>
+                <div sec:authorize="!isAuthenticated()">
+                    <a href="/auth/login" class="btn btn-outline-light">Iniciar Sesión</a>
+                    <a href="/auth/register" class="btn btn-outline-light">Registrarse</a>
+                </div>
             </div>
         </div>
     </header>
@@ -211,6 +219,5 @@
     <footer>
         <p>&copy; 2024 Concesionario Subaru. Todos los derechos reservados.</p>
     </footer>
-
 </body>
 </html>

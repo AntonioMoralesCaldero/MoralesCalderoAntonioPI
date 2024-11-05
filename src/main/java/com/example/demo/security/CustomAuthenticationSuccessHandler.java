@@ -27,7 +27,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            response.sendRedirect("/adminDashboard");
+            response.sendRedirect("/index");
         } else {
             response.sendRedirect("/index");
         }

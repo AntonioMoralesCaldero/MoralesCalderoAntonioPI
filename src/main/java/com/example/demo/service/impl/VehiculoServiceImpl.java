@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VehiculoServiceImpl implements VehiculoService {
@@ -39,5 +40,23 @@ public class VehiculoServiceImpl implements VehiculoService {
         }
 
         return vehiculoModels;
+    }
+    
+    @Override
+    public VehiculoModel getVehiculoById(int id) {
+        Optional<Vehiculo> optionalVehiculo = vehiculoRepository.findById(id);
+        if (optionalVehiculo.isPresent()) {
+            Vehiculo vehiculo = optionalVehiculo.get();
+            return new VehiculoModel(
+                vehiculo.getId(),
+                vehiculo.getModelo(),
+                vehiculo.getColor(),
+                vehiculo.getPrecio(),
+                vehiculo.getPotencia(),
+                vehiculo.getImagen()
+            );
+        } else {
+            throw new RuntimeException("Vehículo no encontrado con el ID: " + id);
+        }
     }
 }
