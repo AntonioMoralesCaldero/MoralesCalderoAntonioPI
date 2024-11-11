@@ -1,4 +1,4 @@
-//Autor: Antonio Miguel Morales Caldero
+// Autor: Antonio Miguel Morales Caldero
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.Usuario;
@@ -27,17 +27,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioModel registrar(UsuarioModel usuarioModel) {
-        Usuario usuario = new Usuario();
-        usuario.setNombre(usuarioModel.getNombre());
-        usuario.setApellidos(usuarioModel.getApellidos());
-        usuario.setfecha_nacimiento(usuarioModel.fecha_nacimiento());
-        usuario.setDireccion(usuarioModel.getDireccion());
-        usuario.setUsername(usuarioModel.getUsername());
+        Usuario usuario = convertirModeloAEntidad(usuarioModel);
         usuario.setPassword(passwordEncoder.encode(usuarioModel.getPassword()));
-
         Usuario savedUsuario = usuarioRepository.save(usuario);
-
-        return convertToModel(savedUsuario);
+        return convertirEntidadAModelo(savedUsuario);
     }
 
     @Override
@@ -49,41 +42,39 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public List<UsuarioModel> findAll() {
         List<Usuario> usuarios = usuarioRepository.findAll();
-        List<UsuarioModel> usuarioModel = new ArrayList<>();
-
+        List<UsuarioModel> usuarioModels = new ArrayList<>();
         for (Usuario usuario : usuarios) {
-            UsuarioModel model = convertToModel(usuario);
-            usuarioModel.add(model);
+            usuarioModels.add(convertirEntidadAModelo(usuario));
         }
-        return usuarioModel;
+        return usuarioModels;
     }
-
 
     @Override
     public UsuarioModel findById(int id) {
-    	Usuario usuario = usuarioRepository.findById(id).orElse(null);
-        return (usuario != null) ? convertToModel(usuario) : null;
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+        return (usuario != null) ? convertirEntidadAModelo(usuario) : null;
     }
-
-
 
     @Override
     public Usuario findByUsername(String username) {
         return usuarioRepository.findByUsername(username);
+    }
+    
+    @Override
+    public Usuario findUsuarioById(int id) {
+        return usuarioRepository.findById(id).orElse(null);
     }
 
     @Override
     public UsuarioModel login(String username, String password) {
         Usuario usuario = usuarioRepository.findByUsername(username);
         if (usuario != null && passwordEncoder.matches(password, usuario.getPassword())) {
-            return convertToModel(usuario);
+            return convertirEntidadAModelo(usuario);
         }
         return null;
     }
 
-
-
-    private UsuarioModel convertToModel(Usuario usuario) {
+    private UsuarioModel convertirEntidadAModelo(Usuario usuario) {
         UsuarioModel model = new UsuarioModel();
         model.setId(usuario.getId());
         model.setNombre(usuario.getNombre());
@@ -96,4 +87,16 @@ public class UsuarioServiceImpl implements UsuarioService {
         return model;
     }
 
+    private Usuario convertirModeloAEntidad(UsuarioModel usuarioModel) {
+        Usuario usuario = new Usuario();
+        usuario.setId(usuarioModel.getId());
+        usuario.setNombre(usuarioModel.getNombre());
+        usuario.setApellidos(usuarioModel.getApellidos());
+        usuario.setfecha_nacimiento(usuarioModel.fecha_nacimiento());
+        usuario.setDireccion(usuarioModel.getDireccion());
+        usuario.setUsername(usuarioModel.getUsername());
+        usuario.setPassword(usuarioModel.getPassword());
+        usuario.setActive(usuarioModel.isActive());
+        return usuario;
+    }
 }

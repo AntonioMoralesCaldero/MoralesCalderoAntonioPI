@@ -5,29 +5,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Coches - Vender Coche</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e8f0f8, #c4d8e8);
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            padding-top: 50px;
+        }
+        .container {
+            margin-top: 20px;
+            max-width: 1100px;
+        }
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            color: #004085;
+            margin-bottom: 40px;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            justify-content: center;
+            padding-bottom: 30px;
+        }
+        .card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #ffffff;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+        .image-container {
+            width: 100%;
+            position: relative;
+            padding-top: 56.25%; /* Relación de aspecto 16:9 */
+            overflow: hidden;
+            border-bottom: 1px solid #ddd;
+        }
+        .card-img-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .card-text {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+        .btn-primary, .btn-secondary {
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            margin-top: 15px;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #ffffff;
+            width: 220px;
+            display: block;
+            margin: 40px auto 0;
+            text-align: center;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .no-coches {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 40px;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-5">
+<div class="container">
     <h2>Mis Coches</h2>
-    <div th:if="${cochesComprados.isEmpty()}">
+    <div th:if="${cochesComprados.isEmpty()}" class="no-coches">
         <p>No has comprado coches todavía.</p>
     </div>
-    <div class="row" th:each="coche : ${cochesComprados}">
-        <div class="col-md-4">
-            <div class="card mb-3">
+    <div class="card-grid" th:each="coche : ${cochesComprados}">
+        <div class="card">
+            <div class="image-container">
                 <img th:src="@{/images/} + ${coche.imagen}" class="card-img-top" alt="Imagen del coche">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${coche.modelo}"></h5>
-                    <p class="card-text">
-                        <strong>Color:</strong> <span th:text="${coche.color}"></span><br>
-                        <strong>Potencia:</strong> <span th:text="${coche.potencia}"></span> CV<br>
-                        <strong>Precio:</strong> <span th:text="${coche.precio}"></span> €
-                    </p>
-                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" th:text="${coche.modelo}">Modelo</h5>
+                <p class="card-text">
+                    <strong>Color:</strong> <span th:text="${coche.color}">Color</span><br>
+                    <strong>Potencia:</strong> <span th:text="${coche.potencia}">Potencia</span> CV<br>
+                    <strong>Precio:</strong> <span th:text="${coche.precio}">Precio</span> €
+                </p>
             </div>
         </div>
     </div>
-    <a href="/vender-tu-coche/agregar" class="btn btn-primary">Añadir Coche</a>
+    <a href="/vender-tu-coche/agregar" class="btn btn-primary mx-auto d-block">Añadir Coche a la venta</a>
+    <a href="/" class="btn btn-secondary">Volver al Inicio</a>
 </div>
 </body>
 </html>

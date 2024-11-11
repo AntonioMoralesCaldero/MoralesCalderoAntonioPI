@@ -5,30 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Vehículo en Venta</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 60px;
+            padding: 40px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333333;
+            text-align: center;
+        }
+        .form-label {
+            font-weight: 500;
+            color: #495057;
+        }
+        .form-control {
+            border-radius: 5px;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 5px;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .form-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-5">
+<div class="container">
     <h2>Agregar tu Vehículo en Venta</h2>
-    <form th:action="@{/vender-tu-coche/agregar}" th:object="${vehiculo}" method="post" enctype="multipart/form-data">
+    <form th:action="@{/vender-tu-coche/agregar}" th:object="${vehiculo}" method="post">
         <div class="mb-3">
             <label for="modelo" class="form-label">Modelo</label>
-            <input type="text" th:field="*{modelo}" class="form-control" id="modelo" required>
+            <input type="text" th:field="*{modelo}" class="form-control" id="modelo" placeholder="Ej: Subaru Impreza" required>
         </div>
         <div class="mb-3">
             <label for="color" class="form-label">Color</label>
-            <input type="text" th:field="*{color}" class="form-control" id="color" required>
+            <input type="text" th:field="*{color}" class="form-control" id="color" placeholder="Ej: Azul" required>
         </div>
         <div class="mb-3">
             <label for="potencia" class="form-label">Potencia (CV)</label>
-            <input type="number" th:field="*{potencia}" class="form-control" id="potencia" required>
+            <input type="number" th:field="*{potencia}" class="form-control" id="potencia" min="50" max="1000" placeholder="Ej: 300" required>
+            <div class="form-text">Introduce la potencia en caballos de vapor.</div>
         </div>
         <div class="mb-3">
             <label for="precio" class="form-label">Precio (€)</label>
-            <input type="number" th:field="*{precio}" class="form-control" id="precio" required>
+            <input type="number" th:field="*{precio}" class="form-control" id="precio" min="1000" placeholder="Ej: 20000" required>
+            <div class="form-text">Introduce el precio en euros.</div>
         </div>
         <div class="mb-3">
-            <label for="imagen" class="form-label">Imagen</label>
-            <input type="text" th:field="*{imagen}" class="form-control" id="imagen" required>
+            <label for="imagen" class="form-label">Nombre de la Imagen</label>
+            <input type="text" th:field="*{imagen}" class="form-control" id="imagen" placeholder="Ej: mi_coche.jpg" required>
+            <div class="form-text">Introduce la ruta desde la carpeta <code>/static/images/</code> dentro del proyecto.</div>
         </div>
         <button type="submit" class="btn btn-primary">Agregar Vehículo</button>
     </form>

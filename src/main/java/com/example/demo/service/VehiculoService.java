@@ -8,8 +8,10 @@ import java.util.List;
 
 public interface VehiculoService {
     List<VehiculoModel> getAllVehiculos();
-	VehiculoModel getVehiculoById(int id);
+    VehiculoModel getVehiculoById(int id);
     VehiculoModel saveVehiculo(VehiculoModel vehiculoModel);
-    List<VehiculoModel> getCochesByUsuarioId(int usuarioId); 
-
+    List<VehiculoModel> getCochesByUsuarioId(int usuarioId);
+    VehiculoModel convertirEntidadAModelo(Vehiculo vehiculo);
+    Vehiculo convertirModeloAEntidad(VehiculoModel vehiculoModel);
+    Vehiculo findVehiculoById(int id);
 }

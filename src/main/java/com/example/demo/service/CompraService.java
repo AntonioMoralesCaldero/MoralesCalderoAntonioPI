@@ -6,4 +6,6 @@ import java.util.List;
 public interface CompraService {
     void registrarCompra(Compra compra);
     List<Compra> obtenerComprasPorUsuario(int usuarioId);
+    void crearCompra(int usuarioId, int vehiculoId);
+
 }
