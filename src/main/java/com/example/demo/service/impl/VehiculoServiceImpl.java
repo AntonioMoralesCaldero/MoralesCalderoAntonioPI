@@ -1,6 +1,8 @@
+// Autor: Antonio Miguel Morales Caldero
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.Compra;
+import com.example.demo.entity.Oferta;
 import com.example.demo.entity.Vehiculo;
 import com.example.demo.model.VehiculoModel;
 import com.example.demo.repository.CompraRepository;
@@ -17,12 +19,12 @@ import java.util.Optional;
 public class VehiculoServiceImpl implements VehiculoService {
 
     private final VehiculoRepository vehiculoRepository;
-    private final CompraRepository compraRepository; // Cambio aquí
+    private final CompraRepository compraRepository;
 
     @Autowired
     public VehiculoServiceImpl(VehiculoRepository vehiculoRepository, CompraRepository compraRepository) {
         this.vehiculoRepository = vehiculoRepository;
-        this.compraRepository = compraRepository; // Cambio aquí
+        this.compraRepository = compraRepository;
     }
 
     @Override
@@ -51,7 +53,7 @@ public class VehiculoServiceImpl implements VehiculoService {
 
     @Override
     public List<VehiculoModel> getCochesByUsuarioId(int usuarioId) {
-        List<Compra> compras = compraRepository.findByUsuarioId(usuarioId); // Cambio aquí
+        List<Compra> compras = compraRepository.findByUsuarioId(usuarioId);
         List<VehiculoModel> vehiculoModels = new ArrayList<>();
         for (Compra compra : compras) {
             vehiculoModels.add(convertirEntidadAModelo(compra.getVehiculo()));
@@ -82,9 +84,21 @@ public class VehiculoServiceImpl implements VehiculoService {
         vehiculo.setImagen(vehiculoModel.getImagen());
         return vehiculo;
     }
-    
+
     @Override
     public Vehiculo findVehiculoById(int id) {
         return vehiculoRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void agregarVehiculoDesdeOferta(Oferta oferta) {
+        Vehiculo vehiculo = new Vehiculo();
+        vehiculo.setModelo(oferta.getModelo());
+        vehiculo.setColor(oferta.getColor());
+        vehiculo.setPrecio(oferta.getPrecio());
+        vehiculo.setPotencia(oferta.getPotencia());
+        vehiculo.setImagen(oferta.getImagen());
+
+        vehiculoRepository.save(vehiculo);
     }
 }

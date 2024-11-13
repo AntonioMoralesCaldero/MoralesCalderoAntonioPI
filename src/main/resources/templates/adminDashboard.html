@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Concesionario Subaru</title>
+    <link rel="stylesheet" href="/css/admin-styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #003a70;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+        }
+
+        .container {
+            padding: 20px 40px;
+        }
+
+        .table-container {
+            margin-top: 20px;
+            overflow-x: auto;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #003a70;
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            color: #555;
+        }
+
+        td img {
+            width: 100px;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background-color: #e30613;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #cc0612;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        footer {
+            background-color: #003a70;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Panel de Administración - Concesionario Subaru</h1>
+        <a href="/logout" class="btn">Cerrar Sesión</a>
+    </header>
+
+    <div class="container">
+        <h2>Ofertas Pendientes</h2>
+        <p>Revisa y gestiona las ofertas pendientes para su aprobación o rechazo.</p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Color</th>
+                        <th>Precio</th>
+                        <th>Potencia</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="oferta : ${ofertas}">
+                        <td th:text="${oferta.modelo}">Modelo</td>
+                        <td th:text="${oferta.color}">Color</td>
+                        <td th:text="${oferta.precio}">Precio</td>
+                        <td th:text="${oferta.potencia}">Potencia</td>
+                        <td><img th:src="${oferta.imagen}" alt="Imagen del Vehículo" /></td>
+                        <td>
+                            <div class="actions">
+                                <form th:action="@{'/admin/ofertas/' + ${oferta.id} + '/aceptar'}" method="post">
+                                    <button type="submit" class="btn">Aceptar</button>
+                                </form>
+                                <form th:action="@{'/admin/ofertas/' + ${oferta.id} + '/rechazar'}" method="post">
+                                    <button type="submit" class="btn">Rechazar</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Concesionario Subaru - Panel de Administración</p>
+    </footer>
+</body>
+</html>

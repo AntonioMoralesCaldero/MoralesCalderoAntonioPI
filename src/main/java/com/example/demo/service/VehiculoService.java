@@ -1,6 +1,7 @@
-//Autor: Antonio Miguel Morales Caldero
+// Autor: Antonio Miguel Morales Caldero
 package com.example.demo.service;
 
+import com.example.demo.entity.Oferta;
 import com.example.demo.entity.Vehiculo;
 import com.example.demo.model.VehiculoModel;
 
@@ -14,4 +15,5 @@ public interface VehiculoService {
     VehiculoModel convertirEntidadAModelo(Vehiculo vehiculo);
     Vehiculo convertirModeloAEntidad(VehiculoModel vehiculoModel);
     Vehiculo findVehiculoById(int id);
+    void agregarVehiculoDesdeOferta(Oferta oferta);
 }

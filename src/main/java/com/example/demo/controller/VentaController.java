@@ -1,8 +1,11 @@
+// Autor: Antonio Miguel Morales Caldero
 package com.example.demo.controller;
 
 import com.example.demo.entity.Usuario;
+import com.example.demo.model.OfertaModel;
+import com.example.demo.model.UsuarioModel;
 import com.example.demo.model.VehiculoModel;
-import com.example.demo.service.CompraService;
+import com.example.demo.service.OfertaService;
 import com.example.demo.service.UsuarioService;
 import com.example.demo.service.VehiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +23,13 @@ public class VentaController {
 
     private final VehiculoService vehiculoService;
     private final UsuarioService usuarioService;
-    private final CompraService compraService;
+    private final OfertaService ofertaService;
 
     @Autowired
-    public VentaController(VehiculoService vehiculoService, UsuarioService usuarioService, CompraService compraService) {
+    public VentaController(VehiculoService vehiculoService, UsuarioService usuarioService, OfertaService ofertaService) {
         this.vehiculoService = vehiculoService;
         this.usuarioService = usuarioService;
-        this.compraService = compraService;
+        this.ofertaService = ofertaService;
     }
 
     @GetMapping("/mis-coches")
@@ -52,7 +55,7 @@ public class VentaController {
     }
 
     @PostMapping("/vender-tu-coche/agregar")
-    public String agregarVehiculo(@ModelAttribute VehiculoModel vehiculoModel, Principal principal) {
+    public String agregarVehiculo(@ModelAttribute OfertaModel ofertaModel, Principal principal) {
         if (principal == null) {
             return "redirect:/auth/login";
         }
@@ -62,8 +65,9 @@ public class VentaController {
             return "redirect:/auth/login";
         }
 
-        VehiculoModel vehiculoGuardado = vehiculoService.saveVehiculo(vehiculoModel);
-        compraService.crearCompra(usuario.getId(), vehiculoGuardado.getId());
+        ofertaModel.setEstado("PENDIENTE");
+        ofertaService.guardarOferta(ofertaModel);
+
         return "redirect:/mis-coches";
     }
 

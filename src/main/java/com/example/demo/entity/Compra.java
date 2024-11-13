@@ -1,3 +1,4 @@
+// Autor: Antonio Miguel Morales Caldero
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
