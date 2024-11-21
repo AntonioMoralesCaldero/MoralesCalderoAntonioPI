@@ -16,4 +16,6 @@ public interface VehiculoService {
     Vehiculo convertirModeloAEntidad(VehiculoModel vehiculoModel);
     Vehiculo findVehiculoById(int id);
     void agregarVehiculoDesdeOferta(Oferta oferta);
+    List<VehiculoModel> obtenerVehiculosOcasionales();
+
 }

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nueva Cita - Concesionario Subaru</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #003a70;
+            color: white;
+            padding: 20px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .container h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #003a70;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            background-color: #e30613;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #cc0612;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Crear Nueva Cita</h1>
+    </header>
+
+    <div class="container">
+        <h2>Detalles de la Cita</h2>
+        <form th:action="@{/taller/citas/crear}" th:object="${citaModel}" method="post">
+            <div>
+                <label for="problema">Descripción del problema:</label>
+                <textarea id="problema" name="problema" th:field="*{problema}" placeholder="Describe el problema de tu vehículo" required></textarea>
+            </div>
+            <div>
+                <label for="fechaCita">Fecha de la cita:</label>
+                <input id="fechaCita" type="datetime-local" name="fechaCita" th:field="*{fechaCita}" required>
+            </div>
+            <button type="submit">Crear Cita</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Concesionario Subaru - Todos los derechos reservados</p>
+    </footer>
+</body>
+</html>

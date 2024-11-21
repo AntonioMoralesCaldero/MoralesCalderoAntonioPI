@@ -6,24 +6,23 @@ import java.time.LocalDate;
 public class UsuarioModel {
 	
     private int id;
-
     private String nombre;
-
     private String apellidos;
-
     private LocalDate fecha_nacimiento;
-
     private String direccion;
-
     private String username;
-
     private String password;
-
     private boolean isActive = true;
     
     public UsuarioModel() {
     	
     }
+    
+    public UsuarioModel(int id, String username) {
+        this.id = id;
+        this.username = username;
+    }
+
 
     public UsuarioModel(int id, String nombre, String apellidos, LocalDate fecha_nacimiento, String direccion, String username,
 	String password, boolean isActive) {

@@ -7,41 +7,101 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
-            font-family: 'Verdana', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
         }
-        .container { max-width: 800px; margin: 50px auto; background: #ffffff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); overflow: hidden; }
-        .header { background-color: #00796b; color: #ffffff; text-align: center; padding: 20px; }
-        .header h1 { margin: 0; font-size: 2rem; font-weight: 700; }
-        .details img { width: 100%; height: auto; border-bottom: 3px solid #00796b; }
-        .details .info { padding: 20px; }
-        .details .info h2 { color: #00796b; font-size: 1.8rem; margin-bottom: 15px; }
-        .details .info p { color: #555; font-size: 1rem; margin-bottom: 10px; }
-        .btn-purchase { display: block; width: 100%; background-color: #00796b; color: #ffffff; border: none; padding: 15px; text-align: center; font-size: 1.2rem; font-weight: bold; border-radius: 0 0 15px 15px; transition: background-color 0.3s; }
-        .btn-purchase:hover { background-color: #004d40; color: #e0f7fa; }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #004d40, #00796b);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .details img {
+            width: 100%;
+            height: auto;
+            border-bottom: 3px solid #00796b;
+        }
+
+        .info {
+            padding: 20px;
+        }
+
+        .info h2 {
+            font-size: 1.8rem;
+            color: #00796b;
+            margin-bottom: 15px;
+        }
+
+        .info p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .info p strong {
+            color: #004d40;
+        }
+
+        .btn-purchase {
+            display: block;
+            width: 100%;
+            background-color: #004d40;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 15px;
+            text-align: center;
+            border: none;
+            border-radius: 0 0 15px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-purchase:hover {
+            background-color: #00796b;
+            color: white;
+            text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1 th:text="${vehiculo.modelo}">Modelo</h1>
+            <h1 th:text="${vehiculo.modelo}">Modelo del Vehículo</h1>
         </div>
+        
         <div class="details">
-            <img th:src="@{/images/} + ${vehiculo.imagen}" alt="Imagen del vehículo">
+            <img th:src="@{/images/} + ${vehiculo.imagen}" alt="Imagen del Vehículo">
+            
             <div class="info">
                 <h2>Detalles del Vehículo</h2>
-                <p><strong>Color:</strong> <span th:text="${vehiculo.color}"></span></p>
-                <p><strong>Potencia:</strong> <span th:text="${vehiculo.potencia}"></span> CV</p>
-                <p><strong>Precio:</strong> <span th:text="${vehiculo.precio}"></span> €</p>
+                <p><strong>Color:</strong> <span th:text="${vehiculo.color}">Color</span></p>
+                <p><strong>Potencia:</strong> <span th:text="${vehiculo.potencia}">0</span> CV</p>
+                <p><strong>Precio:</strong> <span th:text="${vehiculo.precio}">0</span> €</p>
             </div>
-            <!-- Formulario para realizar la compra -->
-            <form th:action="@{/compra}" method="post">
-                <input type="hidden" name="vehiculoId" th:value="${vehiculo.id}" />
-                <button type="submit" class="btn-purchase">Comprar</button>
-            </form>
         </div>
+        
+        <form th:action="@{/compra}" method="post">
+            <input type="hidden" name="vehiculoId" th:value="${vehiculo.id}">
+            <button type="submit" class="btn-purchase">Comprar</button>
+        </form>
     </div>
 </body>
 </html>

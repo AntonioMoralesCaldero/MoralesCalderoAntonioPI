@@ -1,43 +1,30 @@
 //Autor: Antonio Miguel Morales Caldero
 package com.example.demo.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-
-import java.util.Date;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "cita")
 public class Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    private String problema;
+    
+    private LocalDateTime fechaCita;
+    
+    private String estado;
+    
+    private String diagnostico;
+    
+    private LocalDateTime fechaReparacionFinalizada;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "idAdministrador")
-    private Administrador administrador;
-
-    @Column(name = "fecha")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha;
-
-    @Column(name = "observaciones", length = 200)
-    private String observaciones;
-    
-    @Column(name = "diagnostico", length = 200)
-    private String diagnostico;
+    private Vehiculo vehiculoOcasion;
 
 	public int getId() {
 		return id;
@@ -45,6 +32,46 @@ public class Cita {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getProblema() {
+		return problema;
+	}
+
+	public void setProblema(String problema) {
+		this.problema = problema;
+	}
+
+	public LocalDateTime getFechaCita() {
+		return fechaCita;
+	}
+
+	public void setFechaCita(LocalDateTime fechaCita) {
+		this.fechaCita = fechaCita;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getDiagnostico() {
+		return diagnostico;
+	}
+
+	public void setDiagnostico(String diagnostico) {
+		this.diagnostico = diagnostico;
+	}
+
+	public LocalDateTime getFechaReparacionFinalizada() {
+		return fechaReparacionFinalizada;
+	}
+
+	public void setFechaReparacionFinalizada(LocalDateTime fechaReparacionFinalizada) {
+		this.fechaReparacionFinalizada = fechaReparacionFinalizada;
 	}
 
 	public Usuario getUsuario() {
@@ -55,37 +82,13 @@ public class Cita {
 		this.usuario = usuario;
 	}
 
-	public Administrador getAdministrador() {
-		return administrador;
+	public Vehiculo getVehiculoOcasion() {
+		return vehiculoOcasion;
 	}
 
-	public void setAdministrador(Administrador administrador) {
-		this.administrador = administrador;
-	}
-
-	public Date getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
-
-	public String getObservaciones() {
-		return observaciones;
-	}
-
-	public void setObservaciones(String observaciones) {
-		this.observaciones = observaciones;
-	}
-
-	public String getDiagnostico() {
-		return diagnostico;
-	}
-
-	public void setDiagnostico(String diagnostico) {
-		this.diagnostico = diagnostico;
-	}
+	public void setVehiculoOcasion(Vehiculo vehiculoOcasion) {
+		this.vehiculoOcasion = vehiculoOcasion;
+	} 
 
     
 }

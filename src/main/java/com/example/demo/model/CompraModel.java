@@ -9,12 +9,9 @@ import com.example.demo.entity.Vehiculo;
 
 public class CompraModel {
 	
-	private int id;
-	
-	private Usuario usuario;
-	
+	private int id;	
+	private Usuario usuario;	
     private Vehiculo vehiculo;
-
     private LocalDate fechaCompra;
 
 	public CompraModel(int id, Usuario usuario, Vehiculo vehiculo, LocalDate fechaCompra) {

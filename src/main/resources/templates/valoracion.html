@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Valoración de Cita</title>
+</head>
+<body>
+    <h1>Valorar Cita</h1>
+    <form th:action="@{/taller/valoracion/agregar}" method="post">
+        <label>Estrellas (1-5):</label>
+        <input type="number" name="estrellas" min="1" max="5">
+        
+        <label>Comentario:</label>
+        <textarea name="comentario"></textarea>
+        
+        <button type="submit">Enviar Valoración</button>
+    </form>
+</body>
+</html>

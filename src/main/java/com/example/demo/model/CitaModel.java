@@ -1,90 +1,94 @@
-// Autor: Antonio Miguel Morales Caldero
 package com.example.demo.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class CitaModel {
-	
+
     private int id;
-
-    private UsuarioModel usuario;
-
-    private AdministradorModel administrador;
-
-    private Date fecha;
-
-    private String observaciones;
-    
+    private String problema;
+    private LocalDateTime fechaCita;
+    private String estado;
     private String diagnostico;
-    
+    private LocalDateTime fechaReparacionFinalizada;
+    private UsuarioModel usuario; // Cambiamos int por UsuarioModel
+    private int vehiculoOcasionId;
+
     public CitaModel() {
-    	
     }
 
-	public CitaModel(int id, UsuarioModel usuario, AdministradorModel administrador, Date fecha, String observaciones,
-			String diagnostico) {
-		super();
-		this.id = id;
-		this.usuario = usuario;
-		this.administrador = administrador;
-		this.fecha = fecha;
-		this.observaciones = observaciones;
-		this.diagnostico = diagnostico;
-	}
+    public CitaModel(int id, String problema, LocalDateTime fechaCita, String estado, String diagnostico,
+                     LocalDateTime fechaReparacionFinalizada, UsuarioModel usuario, int vehiculoOcasionId) {
+        this.id = id;
+        this.problema = problema;
+        this.fechaCita = fechaCita;
+        this.estado = estado;
+        this.diagnostico = diagnostico;
+        this.fechaReparacionFinalizada = fechaReparacionFinalizada;
+        this.usuario = usuario;
+        this.vehiculoOcasionId = vehiculoOcasionId;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public UsuarioModel getUsuario() {
-		return usuario;
-	}
+    public String getProblema() {
+        return problema;
+    }
 
-	public void setUsuario(UsuarioModel usuario) {
-		this.usuario = usuario;
-	}
+    public void setProblema(String problema) {
+        this.problema = problema;
+    }
 
-	public AdministradorModel getAdministrador() {
-		return administrador;
-	}
+    public LocalDateTime getFechaCita() {
+        return fechaCita;
+    }
 
-	public void setAdministrador(AdministradorModel administrador) {
-		this.administrador = administrador;
-	}
+    public void setFechaCita(LocalDateTime fechaCita) {
+        this.fechaCita = fechaCita;
+    }
 
-	public Date getFecha() {
-		return fecha;
-	}
+    public String getEstado() {
+        return estado;
+    }
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
-	public String getObservaciones() {
-		return observaciones;
-	}
+    public String getDiagnostico() {
+        return diagnostico;
+    }
 
-	public void setObservaciones(String observaciones) {
-		this.observaciones = observaciones;
-	}
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+    }
 
-	public String getDiagnostico() {
-		return diagnostico;
-	}
+    public LocalDateTime getFechaReparacionFinalizada() {
+        return fechaReparacionFinalizada;
+    }
 
-	public void setDiagnostico(String diagnostico) {
-		this.diagnostico = diagnostico;
-	}
+    public void setFechaReparacionFinalizada(LocalDateTime fechaReparacionFinalizada) {
+        this.fechaReparacionFinalizada = fechaReparacionFinalizada;
+    }
 
-	@Override
-	public String toString() {
-		return "CitaModel [id=" + id + ", usuario=" + usuario + ", administrador=" + administrador + ", fecha=" + fecha
-				+ ", observaciones=" + observaciones + ", diagnostico=" + diagnostico + "]";
-	}
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
 
-    
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
+    }
+
+    public int getVehiculoOcasionId() {
+        return vehiculoOcasionId;
+    }
+
+    public void setVehiculoOcasionId(int vehiculoOcasionId) {
+        this.vehiculoOcasionId = vehiculoOcasionId;
+    }
 }

@@ -5,6 +5,7 @@ import com.example.demo.entity.Compra;
 import com.example.demo.entity.Oferta;
 import com.example.demo.entity.Vehiculo;
 import com.example.demo.model.VehiculoModel;
+import com.example.demo.repository.CitaRepository;
 import com.example.demo.repository.CompraRepository;
 import com.example.demo.repository.VehiculoRepository;
 import com.example.demo.service.VehiculoService;
@@ -14,17 +15,20 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class VehiculoServiceImpl implements VehiculoService {
 
     private final VehiculoRepository vehiculoRepository;
     private final CompraRepository compraRepository;
+    private final CitaRepository citaRepository;
 
     @Autowired
-    public VehiculoServiceImpl(VehiculoRepository vehiculoRepository, CompraRepository compraRepository) {
+    public VehiculoServiceImpl(VehiculoRepository vehiculoRepository, CompraRepository compraRepository, CitaRepository citaRepository) {
         this.vehiculoRepository = vehiculoRepository;
         this.compraRepository = compraRepository;
+        this.citaRepository = citaRepository;
     }
 
     @Override
@@ -101,4 +105,17 @@ public class VehiculoServiceImpl implements VehiculoService {
 
         vehiculoRepository.save(vehiculo);
     }
+    
+    @Override
+    public List<VehiculoModel> obtenerVehiculosOcasionales() {
+        List<Vehiculo> vehiculos = vehiculoRepository.findAll();
+
+        List<VehiculoModel> vehiculosOcasionales = vehiculos.stream()
+                .filter(vehiculo -> citaRepository.findByVehiculoOcasion(vehiculo).isEmpty())
+                .map(this::convertirEntidadAModelo)
+                .collect(Collectors.toList());
+
+        return vehiculosOcasionales;
+    }
+
 }
