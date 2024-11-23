@@ -1,4 +1,4 @@
-//Autor: Antonio Miguel Morales Caldero
+// Autor: Antonio Miguel Morales Caldero
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
@@ -20,75 +20,83 @@ public class Cita {
     
     private LocalDateTime fechaReparacionFinalizada;
 
+    private boolean valorada;
+
     @ManyToOne
     private Usuario usuario;
 
     @ManyToOne
     private Vehiculo vehiculoOcasion;
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getProblema() {
-		return problema;
-	}
+    public String getProblema() {
+        return problema;
+    }
 
-	public void setProblema(String problema) {
-		this.problema = problema;
-	}
+    public void setProblema(String problema) {
+        this.problema = problema;
+    }
 
-	public LocalDateTime getFechaCita() {
-		return fechaCita;
-	}
+    public LocalDateTime getFechaCita() {
+        return fechaCita;
+    }
 
-	public void setFechaCita(LocalDateTime fechaCita) {
-		this.fechaCita = fechaCita;
-	}
+    public void setFechaCita(LocalDateTime fechaCita) {
+        this.fechaCita = fechaCita;
+    }
 
-	public String getEstado() {
-		return estado;
-	}
+    public String getEstado() {
+        return estado;
+    }
 
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
-	public String getDiagnostico() {
-		return diagnostico;
-	}
+    public String getDiagnostico() {
+        return diagnostico;
+    }
 
-	public void setDiagnostico(String diagnostico) {
-		this.diagnostico = diagnostico;
-	}
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+    }
 
-	public LocalDateTime getFechaReparacionFinalizada() {
-		return fechaReparacionFinalizada;
-	}
+    public LocalDateTime getFechaReparacionFinalizada() {
+        return fechaReparacionFinalizada;
+    }
 
-	public void setFechaReparacionFinalizada(LocalDateTime fechaReparacionFinalizada) {
-		this.fechaReparacionFinalizada = fechaReparacionFinalizada;
-	}
+    public void setFechaReparacionFinalizada(LocalDateTime fechaReparacionFinalizada) {
+        this.fechaReparacionFinalizada = fechaReparacionFinalizada;
+    }
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
+    public boolean isValorada() {
+        return valorada;
+    }
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+    public void setValorada(boolean valorada) {
+        this.valorada = valorada;
+    }
 
-	public Vehiculo getVehiculoOcasion() {
-		return vehiculoOcasion;
-	}
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-	public void setVehiculoOcasion(Vehiculo vehiculoOcasion) {
-		this.vehiculoOcasion = vehiculoOcasion;
-	} 
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-    
+    public Vehiculo getVehiculoOcasion() {
+        return vehiculoOcasion;
+    }
+
+    public void setVehiculoOcasion(Vehiculo vehiculoOcasion) {
+        this.vehiculoOcasion = vehiculoOcasion;
+    } 
 }

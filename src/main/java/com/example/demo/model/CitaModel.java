@@ -1,3 +1,4 @@
+// Autor: Antonio Miguel Morales Caldero
 package com.example.demo.model;
 
 import java.time.LocalDateTime;
@@ -10,14 +11,15 @@ public class CitaModel {
     private String estado;
     private String diagnostico;
     private LocalDateTime fechaReparacionFinalizada;
-    private UsuarioModel usuario; // Cambiamos int por UsuarioModel
+    private UsuarioModel usuario;
     private int vehiculoOcasionId;
+    private boolean valorada;
 
     public CitaModel() {
     }
 
     public CitaModel(int id, String problema, LocalDateTime fechaCita, String estado, String diagnostico,
-                     LocalDateTime fechaReparacionFinalizada, UsuarioModel usuario, int vehiculoOcasionId) {
+                     LocalDateTime fechaReparacionFinalizada, UsuarioModel usuario, int vehiculoOcasionId, boolean valorada) {
         this.id = id;
         this.problema = problema;
         this.fechaCita = fechaCita;
@@ -26,6 +28,7 @@ public class CitaModel {
         this.fechaReparacionFinalizada = fechaReparacionFinalizada;
         this.usuario = usuario;
         this.vehiculoOcasionId = vehiculoOcasionId;
+        this.valorada = valorada;
     }
 
     public int getId() {
@@ -90,5 +93,13 @@ public class CitaModel {
 
     public void setVehiculoOcasionId(int vehiculoOcasionId) {
         this.vehiculoOcasionId = vehiculoOcasionId;
+    }
+
+    public boolean isValorada() {
+        return valorada;
+    }
+
+    public void setValorada(boolean valorada) {
+        this.valorada = valorada;
     }
 }

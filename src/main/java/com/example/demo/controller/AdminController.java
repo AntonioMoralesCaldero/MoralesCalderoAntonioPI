@@ -68,7 +68,6 @@ public class AdminController {
         return "adminCitas";
     }
 
-    // Update an appointment
     @PostMapping("/citas/{id}/actualizar")
     public String actualizarCita(
             @PathVariable int id,
@@ -77,11 +76,9 @@ public class AdminController {
             @RequestParam(required = false) String fechaReparacionFinalizada,
             @RequestParam(required = false) Integer vehiculoOcasionId) {
 
-        // Fetch the CitaModel by ID
         CitaModel cita = citaService.obtenerCitaPorId(id);
 
         if (cita != null) {
-            // Update the fields of CitaModel
             cita.setDiagnostico(diagnostico);
             cita.setEstado(estado);
 
@@ -93,12 +90,10 @@ public class AdminController {
                 cita.setVehiculoOcasionId(vehiculoOcasionId);
             }
 
-            // Save the updated CitaModel
             citaService.actualizarCita(cita);
         }
 
         return "redirect:/admin/citas";
     }
-    //pedir los impls y service y pedir adminCitas entero
 
 }

@@ -9,57 +9,68 @@ public class Valoracion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
-
-    @OneToOne
-    @JoinColumn(name = "cita_id", nullable = false)
-    private Cita cita;
-
-    private int estrellas;
-
+    @Column(nullable = false, length = 500)
     private String comentario;
 
-	public int getId() {
-		return id;
-	}
+    @Column(nullable = false)
+    private int puntuacion;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "cita_id", referencedColumnName = "id")
+    private Cita cita;
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuario;
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+    public Valoracion() {
+    }
 
-	public Cita getCita() {
-		return cita;
-	}
+    public Valoracion(int id, String comentario, int puntuacion, Cita cita, Usuario usuario) {
+        this.id = id;
+        this.comentario = comentario;
+        this.puntuacion = puntuacion;
+        this.cita = cita;
+        this.usuario = usuario;
+    }
 
-	public void setCita(Cita cita) {
-		this.cita = cita;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public int getEstrellas() {
-		return estrellas;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setEstrellas(int estrellas) {
-		this.estrellas = estrellas;
-	}
+    public String getComentario() {
+        return comentario;
+    }
 
-	public String getComentario() {
-		return comentario;
-	}
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
 
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
+    public int getPuntuacion() {
+        return puntuacion;
+    }
 
-    
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    public Cita getCita() {
+        return cita;
+    }
+
+    public void setCita(Cita cita) {
+        this.cita = cita;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

@@ -25,6 +25,31 @@
         h1 {
             color: #003a70;
             text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            color: white;
+            background-color: #e30613;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: #cc0612;
+        }
+
+        .btn-secondary {
+            background-color: #003a70;
+            margin-bottom: 20px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #002a50;
         }
 
         table {
@@ -42,21 +67,6 @@
         table th {
             background-color: #003a70;
             color: white;
-        }
-
-        .btn {
-            padding: 10px 15px;
-            color: white;
-            background-color: #e30613;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .btn:hover {
-            background-color: #cc0612;
         }
 
         form input {
@@ -83,7 +93,10 @@
 </head>
 <body>
     <div class="container">
+        <a href="/admin/ofertas" class="btn btn-secondary">Volver al Dashboard</a>
+
         <h1>Gestión de Citas</h1>
+
         <table>
             <thead>
                 <tr>

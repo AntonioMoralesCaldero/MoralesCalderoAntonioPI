@@ -1,10 +1,13 @@
+// Autor: Antonio Miguel Morales Caldero
 package com.example.demo.controller;
 
 import com.example.demo.entity.Usuario;
 import com.example.demo.model.CitaModel;
 import com.example.demo.model.UsuarioModel;
-import com.example.demo.repository.UsuarioRepository;
+import com.example.demo.model.ValoracionModel;
 import com.example.demo.service.CitaService;
+import com.example.demo.service.ValoracionService;
+import com.example.demo.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,9 @@ public class TallerController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private ValoracionService valoracionService;
+
     @GetMapping("/citas")
     public String verCitas(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -30,7 +36,6 @@ public class TallerController {
 
         List<CitaModel> citas = citaService.obtenerCitasPorUsuario(usuario.getId());
         model.addAttribute("citas", citas);
-
         return "citas";
     }
 
@@ -45,21 +50,62 @@ public class TallerController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Usuario usuario = usuarioRepository.findByUsername(username);
 
-        // Crear un UsuarioModel a partir del Usuario
         UsuarioModel usuarioModel = new UsuarioModel();
         usuarioModel.setId(usuario.getId());
         usuarioModel.setNombre(usuario.getNombre());
         usuarioModel.setApellidos(usuario.getApellidos());
         usuarioModel.setUsername(usuario.getUsername());
-        // Agrega más propiedades si es necesario
 
-        // Asignar el usuarioModel a la cita
         citaModel.setUsuario(usuarioModel);
 
-        // Crear la cita
         citaService.crearCita(citaModel);
 
         return "redirect:/taller/citas";
     }
 
+    @GetMapping("/citas/{id}/valorar")
+    public String formularioValorar(@PathVariable int id, Model model) {
+        CitaModel cita = citaService.obtenerCitaPorId(id);
+
+        if (cita == null || !cita.getEstado().equalsIgnoreCase("terminado") || cita.isValorada()) {
+            return "redirect:/taller/citas";
+        }
+
+        model.addAttribute("cita", cita);
+        model.addAttribute("valoracion", new ValoracionModel());
+        return "valorar-cita";
+    }
+
+
+    @PostMapping("/citas/{id}/valorar")
+    public String guardarValoracion(
+            @PathVariable int id,
+            @ModelAttribute ValoracionModel valoracionModel) {
+
+        CitaModel cita = citaService.obtenerCitaPorId(id);
+
+        if (cita != null && cita.getEstado().equalsIgnoreCase("terminado") && !cita.isValorada()) {
+            valoracionModel.setCitaId(cita.getId());
+            valoracionModel.setUsuarioId(cita.getUsuario().getId());
+            
+            valoracionService.guardarValoracion(valoracionModel);
+
+            cita.setValorada(true);
+            citaService.actualizarCita(cita);
+        }
+
+        return "redirect:/taller/citas";
+    }
+
+
+    @GetMapping("/citas/no-valoradas")
+    public String verCitasNoValoradas(Model model) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Usuario usuario = usuarioRepository.findByUsername(username);
+
+        List<CitaModel> citasNoValoradas = citaService.obtenerCitasNoValoradasPorUsuario(usuario.getId());
+        model.addAttribute("citasNoValoradas", citasNoValoradas);
+
+        return "citas-no-valoradas";
+    }
 }

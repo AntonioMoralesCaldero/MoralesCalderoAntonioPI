@@ -1,66 +1,62 @@
+//Autor: Antonio Miguel Morales Caldero
 package com.example.demo.model;
 
 public class ValoracionModel {
-	
+
     private int id;
-    private int usuarioId;
-    private int citaId;
-    private int estrellas;
     private String comentario;
-    
+    private int puntuacion;
+    private int citaId;
+    private int usuarioId;
+
     public ValoracionModel() {
-    	
     }
 
-	public ValoracionModel(int id, int usuarioId, int citaId, int estrellas, String comentario) {
-		super();
-		this.id = id;
-		this.usuarioId = usuarioId;
-		this.citaId = citaId;
-		this.estrellas = estrellas;
-		this.comentario = comentario;
-	}
+    public ValoracionModel(int id, String comentario, int puntuacion, int citaId, int usuarioId) {
+        this.id = id;
+        this.comentario = comentario;
+        this.puntuacion = puntuacion;
+        this.citaId = citaId;
+        this.usuarioId = usuarioId;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public int getUsuarioId() {
-		return usuarioId;
-	}
+    public String getComentario() {
+        return comentario;
+    }
 
-	public void setUsuarioId(int usuarioId) {
-		this.usuarioId = usuarioId;
-	}
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
 
-	public int getCitaId() {
-		return citaId;
-	}
+    public int getPuntuacion() {
+        return puntuacion;
+    }
 
-	public void setCitaId(int citaId) {
-		this.citaId = citaId;
-	}
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+    }
 
-	public int getEstrellas() {
-		return estrellas;
-	}
+    public int getCitaId() {
+        return citaId;
+    }
 
-	public void setEstrellas(int estrellas) {
-		this.estrellas = estrellas;
-	}
+    public void setCitaId(int citaId) {
+        this.citaId = citaId;
+    }
 
-	public String getComentario() {
-		return comentario;
-	}
+    public int getUsuarioId() {
+        return usuarioId;
+    }
 
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
-    
-    
-
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
+    }
 }

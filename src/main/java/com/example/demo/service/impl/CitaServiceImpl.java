@@ -1,3 +1,4 @@
+//Autor: Antonio Miguel Morales Caldero
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.Cita;
@@ -33,20 +34,18 @@ public class CitaServiceImpl implements CitaService {
         cita.setProblema(citaModel.getProblema());
         cita.setFechaCita(citaModel.getFechaCita());
         cita.setEstado("pendiente");
+        cita.setValorada(false);
 
-        // Validar y asignar usuario
         Usuario usuario = usuarioRepository.findById(citaModel.getUsuario().getId())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         cita.setUsuario(usuario);
 
-        // Validar y asignar vehículo de ocasión (opcional)
         if (citaModel.getVehiculoOcasionId() != 0) {
             Vehiculo vehiculoOcasion = vehiculoRepository.findById(citaModel.getVehiculoOcasionId())
                     .orElseThrow(() -> new RuntimeException("Vehículo de ocasión no encontrado"));
             cita.setVehiculoOcasion(vehiculoOcasion);
         }
 
-        // Guardar cita y convertir a modelo
         cita = citaRepository.save(cita);
         return convertToModel(cita);
     }
@@ -76,23 +75,20 @@ public class CitaServiceImpl implements CitaService {
         Cita cita = citaRepository.findById(citaModel.getId())
                 .orElseThrow(() -> new RuntimeException("Cita no encontrada"));
 
-        // Actualizar campos
         cita.setDiagnostico(citaModel.getDiagnostico());
         cita.setEstado(citaModel.getEstado());
+        cita.setValorada(citaModel.isValorada());
 
-        // Validar y asignar fecha de reparación
         if (citaModel.getFechaReparacionFinalizada() != null) {
             cita.setFechaReparacionFinalizada(citaModel.getFechaReparacionFinalizada());
         }
 
-        // Validar y asignar vehículo de ocasión (opcional)
         if (citaModel.getVehiculoOcasionId() != 0) {
             Vehiculo vehiculoOcasion = vehiculoRepository.findById(citaModel.getVehiculoOcasionId())
                     .orElseThrow(() -> new RuntimeException("Vehículo de ocasión no encontrado"));
             cita.setVehiculoOcasion(vehiculoOcasion);
         }
 
-        // Guardar cambios
         citaRepository.save(cita);
     }
 
@@ -100,6 +96,24 @@ public class CitaServiceImpl implements CitaService {
     public List<CitaModel> obtenerTodasCitas() {
         return citaRepository.findAll()
                 .stream()
+                .map(this::convertToModel)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void marcarCitaComoValorada(int citaId) {
+        Cita cita = citaRepository.findById(citaId)
+                .orElseThrow(() -> new RuntimeException("Cita no encontrada"));
+
+        cita.setValorada(true);
+        citaRepository.save(cita);
+    }
+
+    @Override
+    public List<CitaModel> obtenerCitasNoValoradasPorUsuario(int usuarioId) {
+        return citaRepository.findByUsuarioId(usuarioId)
+                .stream()
+                .filter(cita -> !cita.isValorada())
                 .map(this::convertToModel)
                 .collect(Collectors.toList());
     }
@@ -113,8 +127,8 @@ public class CitaServiceImpl implements CitaService {
                 cita.getDiagnostico(),
                 cita.getFechaReparacionFinalizada(),
                 new UsuarioModel(cita.getUsuario().getId(), cita.getUsuario().getUsername()),
-                cita.getVehiculoOcasion() != null ? cita.getVehiculoOcasion().getId() : 0
+                cita.getVehiculoOcasion() != null ? cita.getVehiculoOcasion().getId() : 0,
+                cita.isValorada()
         );
     }
 }
-

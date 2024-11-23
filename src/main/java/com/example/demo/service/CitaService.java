@@ -1,8 +1,8 @@
+//Autor: Antonio Miguel Morales Caldero
 package com.example.demo.service;
 
 import com.example.demo.model.CitaModel;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface CitaService {
@@ -12,6 +12,6 @@ public interface CitaService {
     CitaModel obtenerCitaPorId(int citaId);
     void actualizarCita(CitaModel citaModel);
     List<CitaModel> obtenerTodasCitas();
-    
+    void marcarCitaComoValorada(int citaId);
+    List<CitaModel> obtenerCitasNoValoradasPorUsuario(int usuarioId);
 }
-

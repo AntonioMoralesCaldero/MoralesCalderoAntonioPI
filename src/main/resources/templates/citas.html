@@ -65,10 +65,45 @@
         .btn:hover {
             background-color: #cc0612;
         }
+
+        .btn-small {
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            background-color: #003a70;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn-small:hover {
+            background-color: #002856;
+        }
+
+        .btn-secondary {
+            background-color: #003a70;
+            color: white;
+            margin-bottom: 20px;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: inline-block;
+            border-radius: 5px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #002a50;
+        }
+
+        .valorada {
+            color: green;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <a href="/" class="btn-secondary">Volver al Inicio</a>
+
         <h1>Mis Citas</h1>
         <a href="/taller/citas/nueva" class="btn">Crear Nueva Cita</a>
         <div th:if="${#lists.isEmpty(citas)}" class="no-citas">
@@ -81,13 +116,26 @@
                         <th>Fecha de la Cita</th>
                         <th>Problema</th>
                         <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="cita : ${citas}">
-                        <td th:text="${cita.fechaCita}"></td>
+                        <td>
+                            <span th:if="${cita.fechaCita != null}" 
+                                  th:text="${T(java.time.format.DateTimeFormatter).ofPattern('dd/MM/yyyy HH:mm').format(cita.fechaCita)}"></span>
+                            <span th:if="${cita.fechaCita == null}">Sin fecha</span>
+                        </td>
                         <td th:text="${cita.problema}"></td>
                         <td th:text="${cita.estado}"></td>
+                        <td>
+                            <span th:if="${cita.estado == 'Terminado'}" 
+                                  th:text="${cita.valorada ? 'Valorada' : ''}" 
+                                  class="valorada"></span>
+								  <a th:if="${cita.estado == 'Terminado' && !cita.valorada}" 
+								     th:href="@{/taller/citas/{id}/valorar(id=${cita.id})}" 
+								     class="btn-small">Valorar</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
