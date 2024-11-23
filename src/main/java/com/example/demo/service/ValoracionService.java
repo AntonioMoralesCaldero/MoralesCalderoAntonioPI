@@ -5,13 +5,9 @@ import com.example.demo.model.ValoracionModel;
 
 import java.util.List;
 
-public interface ValoracionService {
-	
+public interface ValoracionService {	
     ValoracionModel guardarValoracion(ValoracionModel valoracionModel);
-
     ValoracionModel obtenerValoracionPorId(int id);
-
     List<ValoracionModel> obtenerValoracionesPorUsuario(int usuarioId);
-
     List<ValoracionModel> obtenerTodasValoraciones();
 }
