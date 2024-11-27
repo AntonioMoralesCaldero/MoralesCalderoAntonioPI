@@ -1,4 +1,4 @@
-//Autor: Antonio Miguel Morales Caldero
+// Autor: Antonio Miguel Morales Caldero
 package com.example.demo.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +30,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-        	.csrf(csrf -> csrf
-                .ignoringRequestMatchers("/api/**")
+            .csrf(csrf -> csrf
+                .ignoringRequestMatchers("/api/**", "/auth/**")
             )
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/", "/index", "/auth/login", "/auth/register", "/catalogo", "/images/**").permitAll()
+                .requestMatchers("/", "/index", "/auth/login", "/auth/register", "/catalogo", "/images/**", "/api/auth/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/perfil").hasRole("USUARIO")
-                .requestMatchers("/taller/**").hasRole("USUARIO")
-                .requestMatchers("/compra/**").hasRole("USUARIO")
-                .requestMatchers("/vehiculo/**").hasRole("USUARIO")
+                .requestMatchers("/perfil", "/taller/**", "/compra/**", "/vehiculo/**").hasRole("USUARIO")
                 .anyRequest().authenticated())
             .formLogin(form -> form
                 .loginPage("/auth/login")
