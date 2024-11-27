@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.example.demo.service.CustomUserDetailsService;
 
@@ -28,16 +29,14 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, TokenAuthenticationFilter tokenAuthenticationFilter) throws Exception {
         http
-            .csrf(csrf -> csrf
-                .ignoringRequestMatchers("/api/**", "/auth/**")
-            )
+            .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/", "/index", "/auth/login", "/auth/register", "/catalogo", "/images/**", "/api/auth/**").permitAll()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/perfil", "/taller/**", "/compra/**", "/vehiculo/**").hasRole("USUARIO")
+                .requestMatchers("/", "/index", "/auth/login", "/auth/register", "/catalogo", "/images/**").permitAll()
+                .requestMatchers("/api/**").authenticated()
                 .anyRequest().authenticated())
+            .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .formLogin(form -> form
                 .loginPage("/auth/login")
                 .loginProcessingUrl("/auth/login")
@@ -55,6 +54,9 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+
+
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
