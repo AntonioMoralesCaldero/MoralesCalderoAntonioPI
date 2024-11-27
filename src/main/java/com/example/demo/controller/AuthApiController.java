@@ -61,6 +61,8 @@ public class AuthApiController {
     }
 
     public Integer validateToken(String token) {
+        System.out.println("Validando token: " + token);
         return activeTokens.get(token);
     }
+
 }

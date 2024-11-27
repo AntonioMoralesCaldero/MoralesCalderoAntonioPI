@@ -1,4 +1,4 @@
-//Autor: Antonio Miguel Morales Caldero
+// Autor: Antonio Miguel Morales Caldero
 package com.example.demo.controller;
 
 import com.example.demo.model.VehiculoModel;
@@ -24,6 +24,10 @@ public class ApiCatalogoController {
 
     @GetMapping
     public ResponseEntity<List<VehiculoModel>> getAllVehiculos(@RequestHeader("Authorization") String token) {
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+
         if (authApiController.validateToken(token) != null) {
             return ResponseEntity.ok(vehiculoService.getAllVehiculos());
         } else {
@@ -34,6 +38,10 @@ public class ApiCatalogoController {
     @GetMapping("/{id}")
     public ResponseEntity<VehiculoModel> getVehiculoById(@RequestHeader("Authorization") String token,
                                                          @PathVariable int id) {
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+
         if (authApiController.validateToken(token) != null) {
             return ResponseEntity.ok(vehiculoService.getVehiculoById(id));
         } else {
