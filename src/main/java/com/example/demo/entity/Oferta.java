@@ -28,6 +28,10 @@ public class Oferta {
 
     @Column(name = "estado", length = 20)
     private String estado = "pendiente";
+    
+    @Column(name = "matricula", length = 20)
+    private String matricula;
+
 
 	public int getId() {
 		return id;
@@ -83,7 +87,15 @@ public class Oferta {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
-	} 
+	}
+	
+	public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
 
     
 }

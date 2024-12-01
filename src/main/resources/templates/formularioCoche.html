@@ -53,32 +53,34 @@
 <body>
 <div class="container">
     <h2>Agregar tu Vehículo en Venta</h2>
-    <form th:action="@{/vender-tu-coche/agregar}" th:object="${vehiculo}" method="post">
-        <div class="mb-3">
-            <label for="modelo" class="form-label">Modelo</label>
-            <input type="text" th:field="*{modelo}" class="form-control" id="modelo" placeholder="Ej: Subaru Impreza" required>
-        </div>
-        <div class="mb-3">
-            <label for="color" class="form-label">Color</label>
-            <input type="text" th:field="*{color}" class="form-control" id="color" placeholder="Ej: Azul" required>
-        </div>
-        <div class="mb-3">
-            <label for="potencia" class="form-label">Potencia (CV)</label>
-            <input type="number" th:field="*{potencia}" class="form-control" id="potencia" min="50" max="1000" placeholder="Ej: 300" required>
-            <div class="form-text">Introduce la potencia en caballos de vapor.</div>
-        </div>
-        <div class="mb-3">
-            <label for="precio" class="form-label">Precio (€)</label>
-            <input type="number" th:field="*{precio}" class="form-control" id="precio" min="1000" placeholder="Ej: 20000" required>
-            <div class="form-text">Introduce el precio en euros.</div>
-        </div>
-        <div class="mb-3">
-            <label for="imagen" class="form-label">Nombre de la Imagen</label>
-            <input type="text" th:field="*{imagen}" class="form-control" id="imagen" placeholder="Ej: mi_coche.jpg" required>
-            <div class="form-text">Introduce la ruta desde la carpeta <code>/static/images/</code> dentro del proyecto.</div>
-        </div>
-        <button type="submit" class="btn btn-primary">Agregar Vehículo</button>
-    </form>
+	<form th:action="@{/vender-tu-coche/agregar}" th:object="${vehiculo}" method="post" enctype="multipart/form-data">
+	    <div class="mb-3">
+	        <label for="modelo" class="form-label">Modelo</label>
+	        <input type="text" th:field="*{modelo}" class="form-control" id="modelo" placeholder="Ej: Subaru Impreza" required>
+	    </div>
+	    <div class="mb-3">
+	        <label for="color" class="form-label">Color</label>
+	        <input type="text" th:field="*{color}" class="form-control" id="color" placeholder="Ej: Azul" required>
+	    </div>
+	    <div class="mb-3">
+	        <label for="potencia" class="form-label">Potencia (CV)</label>
+	        <input type="number" th:field="*{potencia}" class="form-control" id="potencia" min="50" max="1000" placeholder="Ej: 300" required>
+	    </div>
+	    <div class="mb-3">
+	        <label for="precio" class="form-label">Precio (€)</label>
+	        <input type="number" th:field="*{precio}" class="form-control" id="precio" min="1000" placeholder="Ej: 20000" required>
+	    </div>
+	    <div class="mb-3">
+	        <label for="imagen" class="form-label">Subir Imagen</label>
+	        <input type="file" name="imagenFile" class="form-control" id="imagen" required>
+	    </div>
+		<div class="mb-3">
+		    <label for="matricula" class="form-label">Matrícula</label>
+		    <input type="text" th:field="*{matricula}" class="form-control" id="matricula" placeholder="Ej: 1234ABC" required>
+		</div>
+
+	    <button type="submit" class="btn btn-primary">Agregar Vehículo</button>
+	</form>
 </div>
 </body>
 </html>

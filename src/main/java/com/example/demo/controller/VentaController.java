@@ -14,7 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.List;
 
@@ -55,7 +61,9 @@ public class VentaController {
     }
 
     @PostMapping("/vender-tu-coche/agregar")
-    public String agregarVehiculo(@ModelAttribute OfertaModel ofertaModel, Principal principal) {
+    public String agregarVehiculo(@ModelAttribute OfertaModel ofertaModel,
+                                   @RequestParam("imagenFile") MultipartFile imagenFile,
+                                   Principal principal) {
         if (principal == null) {
             return "redirect:/auth/login";
         }
@@ -65,11 +73,22 @@ public class VentaController {
             return "redirect:/auth/login";
         }
 
+        String nombreImagen = System.currentTimeMillis() + "_" + imagenFile.getOriginalFilename();
+        try {
+            Path rutaArchivo = Paths.get("src/main/resources/static/images/" + nombreImagen);
+            Files.write(rutaArchivo, imagenFile.getBytes());
+            ofertaModel.setImagen(nombreImagen);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/error";
+        }
+
         ofertaModel.setEstado("PENDIENTE");
         ofertaService.guardarOferta(ofertaModel);
 
         return "redirect:/mis-coches";
     }
+
 
 
     @GetMapping("/venta")

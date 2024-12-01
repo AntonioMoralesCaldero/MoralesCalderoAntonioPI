@@ -34,6 +34,8 @@ public class OfertaServiceImpl implements OfertaService {
         oferta.setPotencia(ofertaModel.getPotencia());
         oferta.setImagen(ofertaModel.getImagen());
         oferta.setEstado(ofertaModel.getEstado());
+        oferta.setMatricula(ofertaModel.getMatricula());
+
         return oferta;
     }
 
@@ -47,6 +49,8 @@ public class OfertaServiceImpl implements OfertaService {
         ofertaModel.setPotencia(oferta.getPotencia());
         ofertaModel.setImagen(oferta.getImagen());
         ofertaModel.setEstado(oferta.getEstado());
+        ofertaModel.setMatricula(oferta.getMatricula());
+        
         return ofertaModel;
     }
     
