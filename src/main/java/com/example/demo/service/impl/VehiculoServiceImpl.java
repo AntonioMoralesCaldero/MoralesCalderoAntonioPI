@@ -104,6 +104,8 @@ public class VehiculoServiceImpl implements VehiculoService {
         vehiculo.setPrecio(oferta.getPrecio());
         vehiculo.setPotencia(oferta.getPotencia());
         vehiculo.setImagen(oferta.getImagen());
+        vehiculo.setMatricula(oferta.getMatricula());
+
 
         vehiculoRepository.save(vehiculo);
     }
