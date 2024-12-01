@@ -25,6 +25,12 @@ public class Vehiculo {
 
     @Column(name = "imagen", length = 255)
     private String imagen;
+    
+    @Column(name = "matricula", length = 15)
+    private String matricula;
+
+    @Column(name = "vendido", nullable = false)
+    private boolean vendido = false;
 
     public int getId() {
         return id;
@@ -73,4 +79,22 @@ public class Vehiculo {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public boolean isVendido() {
+		return vendido;
+	}
+
+	public void setVendido(boolean vendido) {
+		this.vendido = vendido;
+	}
+    
+    
 }

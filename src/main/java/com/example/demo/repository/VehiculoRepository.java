@@ -13,6 +13,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 
 public interface VehiculoRepository extends JpaRepository<Vehiculo, Integer> {
-    @Query("SELECT v FROM Vehiculo v JOIN Compra c ON v.id = c.vehiculo.id WHERE c.usuario.id = :usuarioId")
-    List<Vehiculo> findVehiculosByUsuarioId(@Param("usuarioId") int usuarioId);
+    List<Vehiculo> findByVendidoFalse();
 }

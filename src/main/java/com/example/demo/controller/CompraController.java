@@ -6,6 +6,7 @@ import com.example.demo.entity.Usuario;
 import com.example.demo.entity.Vehiculo;
 import com.example.demo.model.VehiculoModel;
 import com.example.demo.repository.UsuarioRepository;
+import com.example.demo.repository.VehiculoRepository;
 import com.example.demo.service.CompraService;
 import com.example.demo.service.CustomUserDetails;
 import com.example.demo.service.VehiculoService;
@@ -19,17 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CompraController {
 
+    private final VehiculoRepository vehiculoRepository;
+    private final UsuarioRepository usuarioRepository;
     private final CompraService compraService;
-    private final VehiculoService vehiculoService;
-    
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
 
     @Autowired
-    public CompraController(CompraService compraService, VehiculoService vehiculoService) {
+    public CompraController(VehiculoRepository vehiculoRepository, UsuarioRepository usuarioRepository, CompraService compraService) {
+    	
+        this.vehiculoRepository = vehiculoRepository;
+        this.usuarioRepository = usuarioRepository;
         this.compraService = compraService;
-        this.vehiculoService = vehiculoService;
     }
 
     @PostMapping("/compra")
@@ -40,29 +40,32 @@ public class CompraController {
             model.addAttribute("mensajeError", "Usuario no autenticado.");
             return "errorPage";
         }
-        
+
         Usuario usuario = usuarioRepository.findById(usuarioDetails.getId())
                                            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        
-        VehiculoModel vehiculoModel = vehiculoService.getVehiculoById(vehiculoId);
-        
-        Vehiculo vehiculo = new Vehiculo();
-        vehiculo.setId(vehiculoModel.getId());
-        vehiculo.setModelo(vehiculoModel.getModelo());
-        vehiculo.setColor(vehiculoModel.getColor());
-        vehiculo.setPrecio(vehiculoModel.getPrecio());
-        vehiculo.setPotencia(vehiculoModel.getPotencia());
-        vehiculo.setImagen(vehiculoModel.getImagen());
+
+        Vehiculo vehiculo = vehiculoRepository.findById(vehiculoId)
+                                              .orElseThrow(() -> new RuntimeException("Vehículo no encontrado"));
+
+        if (vehiculo.isVendido()) {
+            model.addAttribute("mensajeError", "Este coche ya fue vendido.");
+            return "errorPage";
+        }
+
+        vehiculo.setVendido(true);
+        vehiculoRepository.save(vehiculo);
 
         Compra compra = new Compra();
         compra.setUsuario(usuario);
         compra.setVehiculo(vehiculo);
-
         compraService.registrarCompra(compra);
+
         model.addAttribute("mensaje", "¡Enhorabuena, has comprado este coche!");
 
         return "confirmacionCompra";
     }
+
+
 
 
 }

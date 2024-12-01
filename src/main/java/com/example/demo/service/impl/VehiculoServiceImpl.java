@@ -33,13 +33,10 @@ public class VehiculoServiceImpl implements VehiculoService {
 
     @Override
     public List<VehiculoModel> getAllVehiculos() {
-        List<Vehiculo> vehiculos = vehiculoRepository.findAll();
-        List<VehiculoModel> vehiculoModels = new ArrayList<>();
-        for (Vehiculo vehiculo : vehiculos) {
-            vehiculoModels.add(convertirEntidadAModelo(vehiculo));
-        }
-        return vehiculoModels;
+        List<Vehiculo> vehiculos = vehiculoRepository.findByVendidoFalse();
+        return vehiculos.stream().map(this::convertirEntidadAModelo).collect(Collectors.toList());
     }
+
 
     @Override
     public VehiculoModel getVehiculoById(int id) {
@@ -73,7 +70,9 @@ public class VehiculoServiceImpl implements VehiculoService {
             vehiculo.getColor(),
             vehiculo.getPrecio(),
             vehiculo.getPotencia(),
-            vehiculo.getImagen()
+            vehiculo.getImagen(),
+            vehiculo.getMatricula(),
+            vehiculo.isVendido()
         );
     }
 
@@ -86,8 +85,11 @@ public class VehiculoServiceImpl implements VehiculoService {
         vehiculo.setPrecio(vehiculoModel.getPrecio());
         vehiculo.setPotencia(vehiculoModel.getPotencia());
         vehiculo.setImagen(vehiculoModel.getImagen());
+        vehiculo.setMatricula(vehiculoModel.getMatricula());
+        vehiculo.setVendido(vehiculoModel.isVendido());
         return vehiculo;
     }
+
 
     @Override
     public Vehiculo findVehiculoById(int id) {
