@@ -184,7 +184,7 @@
                         <td th:text="${oferta.precio}">Precio</td>
                         <td th:text="${oferta.potencia}">Potencia</td>
                         <td th:text="${oferta.matricula}">Matrícula</td>
-                        <td><img th:src="${oferta.imagen}" alt="Imagen del Vehículo"></td>
+                        <td><img th:src="@{/images/} + ${oferta.imagen}" class="card-img-top" alt="Imagen de ${oferta.modelo}"></td>
                         <td>
                             <div class="actions">
                                 <form th:action="@{'/admin/ofertas/' + ${oferta.id} + '/aceptar'}" method="post">
