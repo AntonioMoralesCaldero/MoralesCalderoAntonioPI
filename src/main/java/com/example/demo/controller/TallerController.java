@@ -5,8 +5,10 @@ import com.example.demo.entity.Usuario;
 import com.example.demo.model.CitaModel;
 import com.example.demo.model.UsuarioModel;
 import com.example.demo.model.ValoracionModel;
+import com.example.demo.model.VehiculoModel;
 import com.example.demo.service.CitaService;
 import com.example.demo.service.ValoracionService;
+import com.example.demo.service.VehiculoService;
 import com.example.demo.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +30,9 @@ public class TallerController {
 
     @Autowired
     private ValoracionService valoracionService;
+    
+    @Autowired
+    private VehiculoService vehiculoService;
 
     @GetMapping("/citas")
     public String verCitas(Model model) {
@@ -41,6 +46,12 @@ public class TallerController {
 
     @GetMapping("/citas/nueva")
     public String formularioCita(Model model) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Usuario usuario = usuarioRepository.findByUsername(username);
+
+        List<VehiculoModel> vehiculos = vehiculoService.getCochesByUsuarioId(usuario.getId());
+        model.addAttribute("vehiculos", vehiculos);
+
         model.addAttribute("citaModel", new CitaModel());
         return "crear-cita";
     }
@@ -58,10 +69,14 @@ public class TallerController {
 
         citaModel.setUsuario(usuarioModel);
 
-        citaService.crearCita(citaModel);
+        if (citaModel.getVehiculoOcasionId() == null) {
+            throw new IllegalArgumentException("Debe seleccionar un vehículo.");
+        }
 
+        citaService.crearCita(citaModel);
         return "redirect:/taller/citas";
     }
+
 
     @GetMapping("/citas/{id}/valorar")
     public String formularioValorar(@PathVariable int id, Model model) {

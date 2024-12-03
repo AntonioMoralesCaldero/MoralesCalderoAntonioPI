@@ -80,15 +80,19 @@
         <a href="/" class="btn-secondary">Volver al Inicio</a>
 
         <h1>Crear Nueva Cita</h1>
-        <form th:action="@{/taller/citas/crear}" th:object="${citaModel}" method="post">
-            <label for="problema">Descripción del Problema:</label>
-            <textarea id="problema" th:field="*{problema}" rows="4" placeholder="Describe el problema aquí..."></textarea>
-
-            <label for="fechaCita">Fecha de la Cita:</label>
-            <input type="datetime-local" id="fechaCita" th:field="*{fechaCita}" required />         
-
-            <button type="submit" class="btn">Crear Cita</button>
-        </form>
+		<form th:action="@{/taller/citas/crear}" th:object="${citaModel}" method="post">
+		    <label for="problema">Descripción del Problema:</label>
+		    <textarea id="problema" th:field="*{problema}" rows="4" placeholder="Describe el problema aquí..."></textarea>
+		    <label for="vehiculo">Vehículo:</label>
+			<select id="vehiculo" th:field="*{vehiculoOcasionId}">
+			    <option value="" disabled selected>Selecciona un vehículo</option>
+			    <option th:each="vehiculo : ${vehiculos}" 
+			            th:value="${vehiculo.id}" 
+			            th:text="${vehiculo.modelo}">
+			    </option>
+			</select>
+		    <button type="submit" class="btn">Crear Cita</button>
+		</form>
     </div>
 </body>
 </html>

@@ -12,14 +12,14 @@ public class CitaModel {
     private String diagnostico;
     private LocalDateTime fechaReparacionFinalizada;
     private UsuarioModel usuario;
-    private int vehiculoOcasionId;
+    private Integer vehiculoOcasionId;
     private boolean valorada;
 
     public CitaModel() {
     }
 
     public CitaModel(int id, String problema, LocalDateTime fechaCita, String estado, String diagnostico,
-                     LocalDateTime fechaReparacionFinalizada, UsuarioModel usuario, int vehiculoOcasionId, boolean valorada) {
+                     LocalDateTime fechaReparacionFinalizada, UsuarioModel usuario, Integer vehiculoOcasionId, boolean valorada) {
         this.id = id;
         this.problema = problema;
         this.fechaCita = fechaCita;
@@ -87,11 +87,11 @@ public class CitaModel {
         this.usuario = usuario;
     }
 
-    public int getVehiculoOcasionId() {
+    public Integer getVehiculoOcasionId() {
         return vehiculoOcasionId;
     }
 
-    public void setVehiculoOcasionId(int vehiculoOcasionId) {
+    public void setVehiculoOcasionId(Integer vehiculoOcasionId) {
         this.vehiculoOcasionId = vehiculoOcasionId;
     }
 

@@ -32,7 +32,6 @@ public class CitaServiceImpl implements CitaService {
     public CitaModel crearCita(CitaModel citaModel) {
         Cita cita = new Cita();
         cita.setProblema(citaModel.getProblema());
-        cita.setFechaCita(citaModel.getFechaCita());
         cita.setEstado("pendiente");
         cita.setValorada(false);
 
@@ -49,6 +48,7 @@ public class CitaServiceImpl implements CitaService {
         cita = citaRepository.save(cita);
         return convertToModel(cita);
     }
+
 
     @Override
     public void cancelarCita(int citaId) {
