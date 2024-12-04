@@ -68,19 +68,28 @@ public class AdminController {
         return "adminCitas";
     }
 
+
     @PostMapping("/citas/{id}/actualizar")
     public String actualizarCita(
             @PathVariable int id,
             @RequestParam String diagnostico,
             @RequestParam String estado,
             @RequestParam(required = false) String fechaReparacionFinalizada,
+            @RequestParam(required = false) String fechaCita,
             @RequestParam(required = false) Integer vehiculoOcasionId) {
 
         CitaModel cita = citaService.obtenerCitaPorId(id);
 
         if (cita != null) {
             cita.setDiagnostico(diagnostico);
-            cita.setEstado(estado);
+            
+            if ("pendiente".equals(estado) || "terminada".equals(estado)) {
+                cita.setEstado(estado);
+            }
+
+            if (fechaCita != null && !fechaCita.isEmpty()) {
+                cita.setFechaCita(LocalDateTime.parse(fechaCita));
+            }
 
             if (fechaReparacionFinalizada != null && !fechaReparacionFinalizada.isEmpty()) {
                 cita.setFechaReparacionFinalizada(LocalDateTime.parse(fechaReparacionFinalizada));
@@ -95,5 +104,6 @@ public class AdminController {
 
         return "redirect:/admin/citas";
     }
+
 
 }

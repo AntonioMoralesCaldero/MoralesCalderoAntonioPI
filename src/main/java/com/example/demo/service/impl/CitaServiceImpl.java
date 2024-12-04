@@ -83,6 +83,10 @@ public class CitaServiceImpl implements CitaService {
             cita.setFechaReparacionFinalizada(citaModel.getFechaReparacionFinalizada());
         }
 
+        if (citaModel.getFechaCita() != null) { 
+            cita.setFechaCita(citaModel.getFechaCita());
+        }
+
         if (citaModel.getVehiculoOcasionId() != 0) {
             Vehiculo vehiculoOcasion = vehiculoRepository.findById(citaModel.getVehiculoOcasionId())
                     .orElseThrow(() -> new RuntimeException("Vehículo de ocasión no encontrado"));
@@ -91,6 +95,7 @@ public class CitaServiceImpl implements CitaService {
 
         citaRepository.save(cita);
     }
+
 
     @Override
     public List<CitaModel> obtenerTodasCitas() {

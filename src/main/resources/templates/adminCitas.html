@@ -122,13 +122,28 @@
                     <td th:text="${cita.vehiculoOcasionId != 0 ? cita.vehiculoOcasionId : 'No asignado'}"></td>
                     <td th:text="${cita.fechaReparacionFinalizada != null ? cita.fechaReparacionFinalizada : 'No asignada'}"></td>
                     <td>
-                        <form th:action="@{'/admin/citas/' + ${cita.id} + '/actualizar'}" method="post">
-                            <input type="text" name="diagnostico" placeholder="Diagnóstico" th:value="${cita.diagnostico}">
-                            <input type="text" name="estado" placeholder="Estado" th:value="${cita.estado}">
-                            <input type="datetime-local" name="fechaReparacionFinalizada" th:value="${cita.fechaReparacionFinalizada}">
-                            <input type="number" name="vehiculoOcasionId" placeholder="ID Vehículo" th:value="${cita.vehiculoOcasionId}">
-                            <button type="submit">Actualizar</button>
-                        </form>
+						<form th:action="@{'/admin/citas/' + ${cita.id} + '/actualizar'}" method="post">
+						    <input type="text" name="diagnostico" placeholder="Diagnóstico" th:value="${cita.diagnostico}">
+
+						    <select name="estado">
+						        <option value="pendiente" th:selected="${cita.estado == 'pendiente'}">Pendiente</option>
+						        <option value="terminada" th:selected="${cita.estado == 'terminada'}">Terminada</option>
+						    </select>
+
+							<input type="datetime-local" name="fechaCita" th:value="${cita.fechaCita}">
+
+						    <select name="vehiculoOcasionId">
+						        <option th:each="vehiculo : ${vehiculosOcasionales}" 
+						                th:value="${vehiculo.id}" 
+						                th:text="${vehiculo.modelo}" 
+						                th:selected="${vehiculo.id == cita.vehiculoOcasionId}">
+						        </option>
+						    </select>
+
+							<input type="datetime-local" name="fechaReparacionFinalizada" th:value="${cita.fechaReparacionFinalizada}">
+						    <button type="submit">Actualizar</button>
+						</form>
+
                     </td>
                 </tr>
             </tbody>
