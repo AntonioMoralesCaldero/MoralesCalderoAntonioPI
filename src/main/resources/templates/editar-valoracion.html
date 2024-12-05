@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Valoración</title>
+    <link rel="stylesheet" href="/css/styles.css">
+	<style>
+	        body {
+	            margin: 0;
+	            font-family: 'Roboto', sans-serif;
+	            background-color: #f9f9f9;
+	            color: #333;
+	        }
+
+	        .container {
+	            max-width: 600px;
+	            margin: 30px auto;
+	            padding: 20px;
+	            background-color: white;
+	            border-radius: 8px;
+	            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	        }
+
+	        h1 {
+	            color: #003a70;
+	            text-align: center;
+	        }
+
+	        form {
+	            display: flex;
+	            flex-direction: column;
+	        }
+
+	        label {
+	            margin: 10px 0 5px;
+	            font-weight: bold;
+	        }
+
+	        .rating {
+	            display: flex;
+	            flex-direction: row-reverse;
+	            justify-content: center;
+	            margin-bottom: 20px;
+	        }
+
+	        .rating input {
+	            display: none;
+	        }
+
+	        .rating label {
+	            font-size: 2rem;
+	            color: #ccc;
+	            cursor: pointer;
+	            transition: color 0.2s;
+	        }
+
+	        .rating input:checked ~ label,
+	        .rating label:hover,
+	        .rating label:hover ~ label {
+	            color: #f5b301;
+	        }
+
+	        textarea {
+	            padding: 10px;
+	            margin-bottom: 20px;
+	            border: 1px solid #ccc;
+	            border-radius: 5px;
+	            font-size: 1rem;
+	        }
+
+	        .btn {
+	            padding: 10px;
+	            background-color: #e30613;
+	            color: white;
+	            text-align: center;
+	            border: none;
+	            border-radius: 5px;
+	            font-size: 1rem;
+	            cursor: pointer;
+	        }
+
+	        .btn:hover {
+	            background-color: #cc0612;
+	        }
+	    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Valoración</h1>
+		<form th:action="@{/taller/citas/{id}/guardar-valoracion(id=${cita.id})}" th:object="${valoracion}" method="post">
+		    <input type="hidden" th:field="*{id}" />
+		    <label for="puntuacion">Nivel de Satisfacción:</label>
+		    <div class="rating">
+		        <input type="radio" id="estrella5" name="puntuacion" th:value="5" th:field="*{puntuacion}" />
+		        <label for="estrella5" title="Excelente">★</label>
+		        <input type="radio" id="estrella4" name="puntuacion" th:value="4" th:field="*{puntuacion}" />
+		        <label for="estrella4" title="Bueno">★</label>
+		        <input type="radio" id="estrella3" name="puntuacion" th:value="3" th:field="*{puntuacion}" />
+		        <label for="estrella3" title="Regular">★</label>
+		        <input type="radio" id="estrella2" name="puntuacion" th:value="2" th:field="*{puntuacion}" />
+		        <label for="estrella2" title="Malo">★</label>
+		        <input type="radio" id="estrella1" name="puntuacion" th:value="1" th:field="*{puntuacion}" />
+		        <label for="estrella1" title="Muy malo">★</label>
+		    </div>
+
+		    <label for="comentario">Comentario:</label>
+		    <textarea id="comentario" th:field="*{comentario}" rows="4" placeholder="Escribe un comentario sobre el servicio..."></textarea>
+
+		    <button type="submit" class="btn">Guardar Valoración</button>
+		</form>
+    </div>
+</body>
+</html>

@@ -128,14 +128,17 @@
                         </td>
                         <td th:text="${cita.problema}"></td>
                         <td th:text="${cita.estado}"></td>
-                        <td>
-                            <span th:if="${cita.estado == 'Terminado'}" 
-                                  th:text="${cita.valorada ? 'Valorada' : ''}" 
-                                  class="valorada"></span>
-								  <a th:if="${cita.estado == 'Terminado' && !cita.valorada}" 
-								     th:href="@{/taller/citas/{id}/valorar(id=${cita.id})}" 
-								     class="btn-small">Valorar</a>
-                        </td>
+						<td>
+						    <span th:if="${cita.estado == 'Terminado'}" 
+						          th:text="${cita.valorada ? 'Valorada' : ''}" 
+						          class="valorada"></span>
+						    <a th:if="${cita.estado == 'Terminado' && cita.valorada}" 
+						       th:href="@{/taller/citas/{id}/ver-valoracion(id=${cita.id})}" 
+						       class="btn-small">Ver/Editar Valoración</a>
+						    <a th:if="${cita.estado == 'Terminado' && !cita.valorada}" 
+						       th:href="@{/taller/citas/{id}/valorar(id=${cita.id})}" 
+						       class="btn-small">Valorar</a>
+						</td>
                     </tr>
                 </tbody>
             </table>

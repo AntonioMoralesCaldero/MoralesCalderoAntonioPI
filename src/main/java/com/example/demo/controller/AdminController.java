@@ -83,7 +83,7 @@ public class AdminController {
         if (cita != null) {
             cita.setDiagnostico(diagnostico);
             
-            if ("pendiente".equals(estado) || "terminada".equals(estado)) {
+            if ("pendiente".equals(estado) || "Terminado".equals(estado)) {
                 cita.setEstado(estado);
             }
 

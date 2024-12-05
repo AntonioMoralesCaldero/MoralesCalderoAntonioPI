@@ -44,10 +44,29 @@ public class ValoracionServiceImpl implements ValoracionService {
     }
 
     @Override
+    public ValoracionModel actualizarValoracion(ValoracionModel valoracionModel) {
+        Valoracion valoracion = valoracionRepository.findById(valoracionModel.getId())
+                .orElseThrow(() -> new RuntimeException("Valoración no encontrada"));
+
+        valoracion.setComentario(valoracionModel.getComentario());
+        valoracion.setPuntuacion(valoracionModel.getPuntuacion());
+
+        valoracion = valoracionRepository.save(valoracion);
+        return convertToModel(valoracion);
+    }
+
+    @Override
     public ValoracionModel obtenerValoracionPorId(int id) {
         return valoracionRepository.findById(id)
                 .map(this::convertToModel)
                 .orElseThrow(() -> new RuntimeException("Valoración no encontrada"));
+    }
+
+    @Override
+    public ValoracionModel obtenerValoracionPorCitaId(int citaId) {
+        return valoracionRepository.findByCitaId(citaId)
+                .map(this::convertToModel)
+                .orElse(null);
     }
 
     @Override

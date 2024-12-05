@@ -123,4 +123,42 @@ public class TallerController {
 
         return "citas-no-valoradas";
     }
+    
+    @GetMapping("/citas/{id}/ver-valoracion")
+    public String verValoracion(@PathVariable int id, Model model) {
+        CitaModel cita = citaService.obtenerCitaPorId(id);
+
+        if (cita == null || !cita.getEstado().equalsIgnoreCase("terminado") || !cita.isValorada()) {
+            return "redirect:/taller/citas";
+        }
+
+        ValoracionModel valoracion = valoracionService.obtenerValoracionPorCitaId(cita.getId());
+        if (valoracion == null) {
+            return "redirect:/taller/citas";
+        }
+
+        model.addAttribute("cita", cita);
+        model.addAttribute("valoracion", valoracion);
+        return "editar-valoracion";
+    }
+    
+    @PostMapping("/citas/{id}/guardar-valoracion")
+    public String actualizarValoracion(
+            @PathVariable int id,
+            @ModelAttribute ValoracionModel valoracionModel) {
+
+        CitaModel cita = citaService.obtenerCitaPorId(id);
+
+        if (cita == null || !cita.isValorada()) {
+            return "redirect:/taller/citas";
+        }
+
+        valoracionModel.setCitaId(cita.getId());
+        valoracionModel.setUsuarioId(cita.getUsuario().getId());
+        valoracionService.actualizarValoracion(valoracionModel);
+
+        return "redirect:/taller/citas";
+    }
+
+
 }
