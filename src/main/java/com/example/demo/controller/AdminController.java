@@ -104,6 +104,17 @@ public class AdminController {
 
         return "redirect:/admin/citas";
     }
+    
+    @PostMapping("/citas/{id}/cancelar")
+    public String cancelarCita(@PathVariable int id) {
+        try {
+            citaService.cancelarCita(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/admin/citas";
+    }
+
 
 
 }

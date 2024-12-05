@@ -122,6 +122,9 @@
                     <td th:text="${cita.vehiculoOcasionId != 0 ? cita.vehiculoOcasionId : 'No asignado'}"></td>
                     <td th:text="${cita.fechaReparacionFinalizada != null ? cita.fechaReparacionFinalizada : 'No asignada'}"></td>
                     <td>
+						<form th:action="@{'/admin/citas/' + ${cita.id} + '/cancelar'}" method="post" style="display: inline;">
+							<button type="submit" class="btn">Cancelar Cita</button>
+						</form>
 						<form th:action="@{'/admin/citas/' + ${cita.id} + '/actualizar'}" method="post">
 						    <input type="text" name="diagnostico" placeholder="Diagnóstico" th:value="${cita.diagnostico}">
 
