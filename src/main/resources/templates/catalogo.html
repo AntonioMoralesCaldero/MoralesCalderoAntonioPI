@@ -86,7 +86,9 @@
         <div class="row">
             <div class="col-lg-4 col-md-6" th:each="vehiculo : ${vehiculos}">
                 <div class="card">
-                    <img th:src="@{/images/} + ${vehiculo.imagen}" class="card-img-top" alt="Imagen de ${vehiculo.modelo}">
+					<img th:src="${#strings.startsWith(vehiculo.imagen, 'http') ? vehiculo.imagen : '/images/' + vehiculo.imagen}" 
+					     class="card-img-top" 
+					     alt="Imagen de ${vehiculo.modelo}">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${vehiculo.modelo}"></h5>
                         <p class="card-text">Color: <span th:text="${vehiculo.color}"></span></p>
