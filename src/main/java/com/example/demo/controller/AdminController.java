@@ -3,9 +3,11 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Oferta;
 import com.example.demo.model.CitaModel;
+import com.example.demo.model.ValoracionModel;
 import com.example.demo.model.VehiculoModel;
 import com.example.demo.service.CitaService;
 import com.example.demo.service.OfertaService;
+import com.example.demo.service.ValoracionService;
 import com.example.demo.service.VehiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,9 @@ public class AdminController {
 
     @Autowired
     private CitaService citaService;
+    
+    @Autowired
+    private ValoracionService valoracionService;
 
     @GetMapping("/ofertas")
     public String verOfertas(Model model) {
@@ -113,6 +118,29 @@ public class AdminController {
             e.printStackTrace();
         }
         return "redirect:/admin/citas";
+    }
+
+    
+    @GetMapping("/valoraciones")
+    public String listarValoraciones(Model model) {
+        List<ValoracionModel> valoraciones = valoracionService.obtenerTodasValoraciones();
+        model.addAttribute("valoraciones", valoraciones);
+        return "admin-valoraciones";
+    }
+    
+    @PostMapping("/valoraciones/{id}/editar")
+    public String editarComentarioValoracion(
+            @PathVariable int id,
+            @RequestParam("comentario") String comentario) {
+
+        ValoracionModel valoracion = valoracionService.obtenerValoracionPorId(id);
+
+        if (valoracion != null) {
+            valoracion.setComentario(comentario);
+            valoracionService.actualizarValoracion(valoracion);
+        }
+
+        return "redirect:/admin/valoraciones";
     }
 
 

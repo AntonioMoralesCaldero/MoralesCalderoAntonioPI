@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Valoraciones</title>
+    <link rel="stylesheet" href="/css/styles.css">
+	<style>
+	        body {
+	            margin: 0;
+	            font-family: 'Roboto', sans-serif;
+	            background-color: #f9f9f9;
+	            color: #333;
+	        }
+
+	        .container {
+	            max-width: 1200px;
+	            margin: 20px auto;
+	            padding: 20px;
+	            background-color: white;
+	            border-radius: 8px;
+	            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	        }
+
+	        h1 {
+	            color: #003a70;
+	            text-align: center;
+	            margin-bottom: 20px;
+	        }
+
+	        .btn {
+	            padding: 10px 15px;
+	            color: white;
+	            background-color: #e30613;
+	            border: none;
+	            border-radius: 4px;
+	            cursor: pointer;
+	            text-decoration: none;
+	            font-size: 0.9rem;
+	        }
+
+	        .btn:hover {
+	            background-color: #cc0612;
+	        }
+
+	        .btn-secondary {
+	            background-color: #003a70;
+	            margin-bottom: 20px;
+	        }
+
+	        .btn-secondary:hover {
+	            background-color: #002a50;
+	        }
+
+	        table {
+	            width: 100%;
+	            border-collapse: collapse;
+	            margin-top: 20px;
+	        }
+
+	        table th, table td {
+	            padding: 12px 15px;
+	            text-align: left;
+	            border-bottom: 1px solid #ddd;
+	        }
+
+	        table th {
+	            background-color: #003a70;
+	            color: white;
+	        }
+
+	        table tbody tr:hover {
+	            background-color: #f1f1f1;
+	        }
+
+	        textarea {
+	            width: 100%;
+	            padding: 8px;
+	            border: 1px solid #ddd;
+	            border-radius: 4px;
+	            font-size: 0.9rem;
+	            resize: none;
+	        }
+
+	        textarea:focus {
+	            border-color: #003a70;
+	            outline: none;
+	        }
+
+	        button {
+	            margin-top: 10px;
+	            padding: 8px 12px;
+	            background-color: #003a70;
+	            color: white;
+	            border: none;
+	            border-radius: 4px;
+	            cursor: pointer;
+	        }
+
+	        button:hover {
+	            background-color: #002a50;
+	        }
+
+	        .stars {
+	            color: #f5c518;
+	            font-size: 1.2rem;
+	        }
+	    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/admin/citas" class="btn btn-secondary">Volver al Dashboard</a>
+
+        <h1>Gestión de Valoraciones</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Puntuación</th>
+                    <th>Comentario</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="valoracion : ${valoraciones}">
+                    <td th:text="${valoracion.id}"></td>
+                    <td th:text="${valoracion.usuarioId}"></td>
+					<td>
+						<span class="stars" th:utext="${'★'.repeat(valoracion.puntuacion)}"></span>
+						<span th:if="${valoracion.puntuacion < 5}" th:utext="${'☆'.repeat(5 - valoracion.puntuacion)}"></span>
+					</td>
+                    <td>
+                        <form th:action="@{'/admin/valoraciones/' + ${valoracion.id} + '/editar'}" method="post">
+                            <textarea name="comentario" rows="2" style="width: 100%;" 
+                                      th:text="${valoracion.comentario}"></textarea>
+                            <button type="submit" class="btn">Actualizar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
