@@ -78,6 +78,7 @@ public class VentaController {
 
         try {
             String imageUrl = cloudinaryService.uploadImage(imagenFile);
+            System.out.println("URL de la imagen subida: " + imageUrl);
             ofertaModel.setImagen(imageUrl);
         } catch (IOException e) {
             e.printStackTrace();
