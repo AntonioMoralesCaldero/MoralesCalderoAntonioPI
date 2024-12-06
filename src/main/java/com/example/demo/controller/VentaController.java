@@ -5,6 +5,7 @@ import com.example.demo.entity.Usuario;
 import com.example.demo.model.OfertaModel;
 import com.example.demo.model.UsuarioModel;
 import com.example.demo.model.VehiculoModel;
+import com.example.demo.service.CloudinaryService;
 import com.example.demo.service.OfertaService;
 import com.example.demo.service.UsuarioService;
 import com.example.demo.service.VehiculoService;
@@ -30,12 +31,14 @@ public class VentaController {
     private final VehiculoService vehiculoService;
     private final UsuarioService usuarioService;
     private final OfertaService ofertaService;
+    private final CloudinaryService cloudinaryService;
 
     @Autowired
-    public VentaController(VehiculoService vehiculoService, UsuarioService usuarioService, OfertaService ofertaService) {
+    public VentaController(VehiculoService vehiculoService, UsuarioService usuarioService, OfertaService ofertaService, CloudinaryService cloudinaryService) {
         this.vehiculoService = vehiculoService;
         this.usuarioService = usuarioService;
         this.ofertaService = ofertaService;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @GetMapping("/mis-coches")
@@ -73,11 +76,9 @@ public class VentaController {
             return "redirect:/auth/login";
         }
 
-        String nombreImagen = System.currentTimeMillis() + "_" + imagenFile.getOriginalFilename();
         try {
-            Path rutaArchivo = Paths.get("src/main/resources/static/images/" + nombreImagen);
-            Files.write(rutaArchivo, imagenFile.getBytes());
-            ofertaModel.setImagen(nombreImagen);
+            String imageUrl = cloudinaryService.uploadImage(imagenFile);
+            ofertaModel.setImagen(imageUrl);
         } catch (IOException e) {
             e.printStackTrace();
             return "redirect:/error";
@@ -88,6 +89,7 @@ public class VentaController {
 
         return "redirect:/mis-coches";
     }
+
 
 
 
