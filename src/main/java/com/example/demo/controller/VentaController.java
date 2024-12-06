@@ -87,6 +87,7 @@ public class VentaController {
 
         ofertaModel.setEstado("PENDIENTE");
         ofertaService.guardarOferta(ofertaModel);
+        System.out.println("Guardando URL de la imagen: " + ofertaModel.getImagen());
 
         return "redirect:/mis-coches";
     }
