@@ -88,8 +88,9 @@
         </div>
         
         <div class="details">
-            <img th:src="@{/images/} + ${vehiculo.imagen}" alt="Imagen del Vehículo">
-            
+			<img th:src="${#strings.startsWith(vehiculo.imagen, 'http') ? vehiculo.imagen : '/images/' + vehiculo.imagen}" 
+								     class="card-img-top" 
+								     alt="Imagen de ${vehiculo.modelo}">            
             <div class="info">
                 <h2>Detalles del Vehículo</h2>
                 <p><strong>Color:</strong> <span th:text="${vehiculo.color}">Color</span></p>
