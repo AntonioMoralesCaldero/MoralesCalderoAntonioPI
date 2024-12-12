@@ -114,9 +114,8 @@
     <div class="card-grid" th:each="coche : ${cochesComprados}">
         <div class="card">
             <div class="image-container">
-				<img th:src="${#strings.startsWith(vehiculo.imagen, 'http') ? vehiculo.imagen : '/images/' + vehiculo.imagen}" 
-												     class="card-img-top" 
-												     alt="Imagen de ${vehiculo.modelo}"> 
+				<img th:src="${#strings.startsWith(coche.imagen, 'http') ? coche.imagen : '/images/' + coche.imagen}" 
+												     class="card-img-top"> 
             </div>
             <div class="card-body">
                 <h5 class="card-title" th:text="${coche.modelo}">Modelo</h5>
